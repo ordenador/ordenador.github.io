@@ -52,16 +52,97 @@ Continuously learning, I explore the latest technologies, tools, and frameworks 
     {
       title: "AI Platform Lead (GenOps Team Lead)",
       company: "Falabella Financiero",
-      type: "Full-time",
       period: "May 2024 - Present",
-      duration: "1 yr 1 mo",
-      location: "Santiago, Santiago Metropolitan Region, Chile",
+      duration: "",
+      location: "Santiago, Chile",
       workType: "Hybrid",
       responsibilities: [
         "Leader of the GenOps Initiative, responsible for designing the foundational architecture of a unified platform for AI developers at Falabella Financiero — empowering application teams to leverage Generative AI, simplifying access to diverse models, and enhancing security and cost management."
       ]
     },
-    // ... Add all other experiences following the same structure
+    {
+      title: "DevOps Lead - R&D, Developer Experience Team",
+      company: "Falabella Financiero",
+      period: "11/2023 - 04/2024",
+      duration: "6 mos",
+      location: "Santiago, Chile",
+      responsibilities: [
+        "Leading teams responsible for Developer Experience, Platform Architecture Standards, and the evolution of internal tools platforms.",
+        "Optimized and standardized deployment workflows.",
+        "Evolved and managed internal tools.",
+        "Generative Al product for extracting information from past incidents to enhance the knowledge base."
+      ]
+    },
+    {
+      title: "DevOps Lead - R&D Team in Architecture",
+      company: "Falabella Financiero",
+      period: "11/2020 - 10/2023",
+      duration: "3 yrs",
+      location: "Santiago, Chile",
+      responsibilities: [
+        "Leading team that promote the adoption of the DevOps philosophy, foster collective intelligence, and empower teams to innovate and continuously improve for the benefit of the organization.",
+        "Achieved cross-departmental synergies by facilitating collaborative efforts with 5 platform teams, enhancing teamwork and efficiency by eliminating duplicate efforts.",
+        "Implemented and standardized Backstage (Internal Developer Portal).",
+        "Definition of Kubernetes usage across all Falabella Financiero platform teams."
+      ]
+    },
+    {
+      title: "DevOps Lead - New Technologies Team",
+      company: "Falabella Financiero",
+      period: "07/2019 - 10/2020",
+      duration: "1 yr 4 mos",
+      location: "Santiago, Chile",
+      responsibilities: [
+        "Leading team that improves and proposes new technologies so the components implementing DevOps accomplished the latest industry standards.",
+        "Implemented advanced monitoring and alerts using Prometheus, enhancing system reliability.",
+        "Encourage the use of Kubernetes."
+      ]
+    },
+    {
+      title: "DevOps Engineer",
+      company: "Falabella Financiero",
+      period: "10/2017 - 06/2019",
+      duration: "1 yr 9 mos",
+      location: "Santiago, Chile",
+      responsibilities: [
+        "Advanced infrastructure automation using Terraform (8x speed increase).",
+        "Secure and automated secrets management implementation."
+      ]
+    },
+    {
+      title: "DevOps Consultant",
+      company: "Finalis",
+      period: "06/2020 - 07/2022",
+      duration: "2 yrs 2 mos",
+      location: "Santiago, Chile",
+      responsibilities: [
+        "Organized teams, enhanced process visibility, and provided technical guidance for best practices in DevOps Team."
+      ]
+    },
+    {
+      title: "Sysadmin Engineer",
+      company: "LATAM Airlines Group",
+      period: "06/2016 - 10/2017",
+      duration: "1 yr 5 mos",
+      location: "Santiago, Chile",
+      responsibilities: [
+        "Support to developer teams in: infrastructure, CI/CD, all transversal tools.",
+        "Manage Servers, delivery multiples environments to developers.",
+        "Automation of manual procedures, for example: database maintaining, CMS maintaining.",
+        "Administration of database MySQL in HA."
+      ]
+    },
+    {
+      title: "Sysadmin Engineer",
+      company: "Adessa Falabella",
+      period: "06/2012 - 12/2015",
+      duration: "3 yrs 7 mos",
+      location: "Santiago, Chile",
+      responsibilities: [
+        "Linux and AIX administration, IBM Virtual I/O and storage support.",
+        "Developed Bash and Python scripts, Nagios support."
+      ]
+    }
   ],
   skills: {
     "Change Maker": [
