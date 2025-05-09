@@ -240,7 +240,7 @@
     <div id="downloadPdfBtnContainer" class="max-w-5xl mx-auto mb-6 flex justify-center md:justify-end">
         <button id="downloadPdfBtn">
             <i class="fas fa-file-pdf mr-2"></i>
-            Descargar PDF
+            Download PDF
         </button>
     </div>
 
@@ -545,7 +545,7 @@
                 console.error('Error: html2pdf.js library not loaded.');
                 const downloadButton = document.getElementById('downloadPdfBtn');
                 if(downloadButton) {
-                    downloadButton.textContent = 'Error al cargar librería PDF';
+                    downloadButton.textContent = 'Error loading PDF library';
                     downloadButton.disabled = true;
                 }
                 return;
