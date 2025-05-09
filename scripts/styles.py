@@ -128,16 +128,6 @@ def get_pdf_styles():
             }}
             .description-list li {{
                 margin-bottom: 4pt !important;
-                position: relative !important;
-            }}
-            .description-list li:not(:first-child) {{
-                padding-left: 12pt !important;
-            }}
-            .description-list li:not(:first-child)::before {{
-                content: "•" !important;
-                position: absolute !important;
-                left: 0 !important;
-                color: #384347 !important;
             }}
             /* Trabajos a excluir en el PDF */
             {excluded_jobs_css}

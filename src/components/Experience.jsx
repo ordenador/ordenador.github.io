@@ -25,7 +25,9 @@ const Experience = () => {
             </p>
             <ul className="description-list">
               {exp.responsibilities.map((resp, idx) => (
-                <li key={idx}>{resp}</li>
+                <li key={idx} className={idx === 0 ? "mb-2" : "ml-4 text-gray-700"}>
+                  {idx === 0 ? resp : `• ${resp}`}
+                </li>
               ))}
             </ul>
           </div>
