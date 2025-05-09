@@ -3,7 +3,7 @@ import { resumeData } from '../data/resume';
 
 const Languages = () => {
   const { languages } = resumeData;
-  
+
   return (
     <section className="mb-6 languages-section">
       <h3 className="section-title">Languages</h3>
@@ -14,6 +14,6 @@ const Languages = () => {
       ))}
     </section>
   );
-}
+};
 
-export default Languages; 
+export default Languages;

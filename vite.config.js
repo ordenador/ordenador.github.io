@@ -3,16 +3,17 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  base: '/ordenador.github.io/',
   server: {
-    port: 3000
+    port: 3000,
   },
   build: {
     outDir: 'dist',
-    assetsDir: 'assets'
+    assetsDir: 'assets',
   },
   esbuild: {
     loader: 'jsx',
     include: /\.[jt]sx?$/,
-    exclude: []
-  }
-}); 
+    exclude: [],
+  },
+});

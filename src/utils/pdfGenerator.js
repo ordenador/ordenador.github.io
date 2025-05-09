@@ -1,12 +1,11 @@
 export function generatePDF() {
-  if (typeof html2pdf === 'undefined') {
+  if (typeof window.html2pdf === 'undefined') {
     console.error('Error: html2pdf.js library not loaded.');
     return Promise.reject(new Error('PDF library not loaded'));
   }
 
   const resumeContent = document.getElementById('resumeContent');
-  const downloadButtonContainer = document.getElementById('downloadPdfBtnContainer');
-  
+
   // Store original styles
   const originalStyles = {
     maxWidth: resumeContent.style.maxWidth,
@@ -14,7 +13,7 @@ export function generatePDF() {
     padding: resumeContent.style.padding,
     boxShadow: resumeContent.style.boxShadow,
     borderRadius: resumeContent.style.borderRadius,
-    background: resumeContent.style.background
+    background: resumeContent.style.background,
   };
 
   // Apply override styles for PDF generation
@@ -36,13 +35,14 @@ export function generatePDF() {
       logging: true,
       useCORS: true,
       scrollX: 0,
-      scrollY: 0
+      scrollY: 0,
     },
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: ['css', 'legacy'], avoid: '.pdf-avoid-break' }
+    pagebreak: { mode: ['css', 'legacy'], avoid: '.pdf-avoid-break' },
   };
 
-  return html2pdf()
+  return window
+    .html2pdf()
     .from(resumeContent)
     .set(opt)
     .save()
@@ -68,4 +68,4 @@ export function generatePDF() {
       document.body.classList.remove('generating-pdf');
       throw error;
     });
-} 
+}

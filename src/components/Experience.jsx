@@ -25,7 +25,7 @@ const Experience = () => {
             </p>
             <ul className="description-list">
               {exp.responsibilities.map((resp, idx) => (
-                <li key={idx} className={idx === 0 ? "mb-2" : "ml-4 text-gray-700"}>
+                <li key={idx} className={idx === 0 ? 'mb-2' : 'ml-4 text-gray-700'}>
                   {idx === 0 ? resp : `• ${resp}`}
                 </li>
               ))}
@@ -38,6 +38,6 @@ const Experience = () => {
       ))}
     </section>
   );
-}
+};
 
-export default Experience; 
+export default Experience;

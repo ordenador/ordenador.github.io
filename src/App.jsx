@@ -26,16 +26,22 @@ function App() {
 
   return (
     <div className="bg-gray-100 p-4 md:p-8">
-      <div id="downloadPdfBtnContainer" className="max-w-5xl mx-auto mb-6 flex justify-center md:justify-end">
+      <div
+        id="downloadPdfBtnContainer"
+        className="max-w-5xl mx-auto mb-6 flex justify-center md:justify-end"
+      >
         <button id="downloadPdfBtn">
           <i className="fas fa-file-pdf mr-2"></i>
           Download PDF
         </button>
       </div>
-      
-      <div id="resumeContent" className="max-w-5xl mx-auto bg-white shadow-xl rounded-lg p-6 md:p-10">
+
+      <div
+        id="resumeContent"
+        className="max-w-5xl mx-auto bg-white shadow-xl rounded-lg p-6 md:p-10"
+      >
         <Header />
-        
+
         <div className="main-content-grid">
           <div className="left-column">
             <Education />
@@ -56,4 +62,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
