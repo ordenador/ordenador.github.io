@@ -120,19 +120,6 @@ const Experience = () => {
           <li>Developed Bash and Python scripts, Nagios support.</li>
         </ul>
       </div>
-      <hr className="border-dashed border-gray-300" />
-      <div className="experience-item">
-        <p className="entry-title">Support Engineer</p>
-        <p className="institution-name">ARS Servicios Profesionales</p>
-        <div className="meta-info">
-          <span className="job-type">Full-time</span>
-          <span><i className="fas fa-calendar-alt"></i>06/2011 - 06/2012 · 1 yr 1 mo</span>
-          <span><i className="fas fa-map-marker-alt"></i>Santiago, Chile</span>
-        </div>
-        <ul className="description-list">
-          <li>Specialized support for critical systems and HP hardware.</li>
-        </ul>
-      </div>
     </section>
   );
 }

@@ -2,6 +2,19 @@ import asyncio
 from pathlib import Path
 from playwright.async_api import async_playwright
 
+# Configuración de trabajos a excluir en el PDF
+EXCLUDED_JOBS = [
+    {
+        "company": "ARS Servicios Profesionales",
+        "title": "Support Engineer"
+    }
+    # Agregar más trabajos a excluir siguiendo el mismo formato
+    # {
+    #     "company": "Nombre de la Empresa",
+    #     "title": "Título del Trabajo"
+    # }
+]
+
 async def generate_cv_pdf():
     """
     Genera un PDF de un CV renderizado por React, sirviendo la aplicación localmente.
@@ -146,82 +159,186 @@ async def generate_cv_pdf():
             return
 
         # Inyectar CSS para forzar el layout correcto
-        await page.add_style_tag(content="""
-            @media print {
-                body {
+        excluded_jobs_css = "\n".join([
+            f'.experience-item:has(.institution-name:contains("{job["company"]}")):has(.entry-title:contains("{job["title"]}")) {{ display: none !important; }}'
+            for job in EXCLUDED_JOBS
+        ])
+
+        await page.add_style_tag(content=f"""
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+            @media print {{
+                body {{
                     width: 100% !important;
                     margin: 0 !important;
                     padding: 0 !important;
                     background: white !important;
-                }
-                #root {
+                    font-family: 'Poppins', sans-serif !important;
+                    color: #384347 !important;
+                }}
+                #root {{
                     padding: 0 !important;
                     margin: 0 !important;
                     background: white !important;
-                }
-                #downloadPdfBtnContainer {
+                }}
+                #downloadPdfBtnContainer {{
                     display: none !important;
-                }
-                #resumeContent {
+                }}
+                #resumeContent {{
                     max-width: none !important;
                     margin: 0 !important;
-                    padding: 10px !important;
+                    padding: 0 !important;
                     box-shadow: none !important;
                     border-radius: 0 !important;
                     background: white !important;
-                }
-                header {
+                }}
+                header {{
                     display: flex !important;
                     justify-content: space-between !important;
                     align-items: flex-start !important;
                     text-align: left !important;
-                    margin-bottom: 1.5rem !important;
-                }
-                header > div:first-child {
+                    margin-bottom: 28pt !important;
+                }}
+                header > div:first-child {{
                     text-align: left !important;
-                }
-                header > div:last-child {
+                }}
+                header > div:last-child {{
                     text-align: right !important;
-                }
-                header .contact-info {
+                }}
+                header .contact-info {{
                     text-align: right !important;
-                }
-                header .contact-info > div {
+                }}
+                header .contact-info > div {{
                     justify-content: flex-end !important;
-                }
-                header .contact-info i {
+                }}
+                header .contact-info i {{
                     margin-right: 0.5rem !important;
-                }
-                .main-content-grid {
+                }}
+                /* Estilos de tipografía específicos */
+                h1 {{
+                    font-size: 26pt !important;
+                    font-weight: 700 !important;
+                    color: #002878 !important;
+                    line-height: 1.2 !important;
+                    margin-bottom: 4pt !important;
+                }}
+                h2 {{
+                    font-size: 14pt !important;
+                    font-weight: 700 !important;
+                    color: #ff6e1b !important;
+                    line-height: 1.2 !important;
+                }}
+                .section-title {{
+                    font-size: 14pt !important;
+                    font-weight: 700 !important;
+                    color: #002878 !important;
+                    line-height: 1.2 !important;
+                    margin-bottom: 14pt !important;
+                    margin-top: 10pt !important;
+                }}
+                .entry-title {{
+                    font-size: 11pt !important;
+                    font-weight: 400 !important;
+                    color: #002878 !important;
+                    line-height: 1.2 !important;
+                    margin-bottom: 4pt !important;
+                }}
+                .institution-name {{
+                    font-size: 11pt !important;
+                    font-weight: 700 !important;
+                    color: #ff6e1b !important;
+                    line-height: 1.2 !important;
+                    margin-bottom: 4pt !important;
+                }}
+                .meta-info {{
+                    font-size: 10.5pt !important;
+                    font-weight: 400 !important;
+                    color: #384347 !important;
+                    line-height: 1.25 !important;
+                    margin-bottom: 8pt !important;
+                }}
+                .meta-info i {{
+                    color: #384347 !important;
+                }}
+                .description-list {{
+                    font-size: 9.5pt !important;
+                    font-weight: 400 !important;
+                    color: #384347 !important;
+                    line-height: 1.1 !important;
+                    margin-bottom: 8pt !important;
+                    padding-left: 0 !important;
+                    list-style-type: none !important;
+                }}
+                .description-list li {{
+                    margin-bottom: 4pt !important;
+                    position: relative !important;
+                }}
+                .description-list li:not(:first-child) {{
+                    padding-left: 12pt !important;
+                }}
+                .description-list li:not(:first-child)::before {{
+                    content: "•" !important;
+                    position: absolute !important;
+                    left: 0 !important;
+                    color: #384347 !important;
+                }}
+                /* Trabajos a excluir en el PDF */
+                {excluded_jobs_css}
+                /* Estilos específicos para el perfil */
+                .profile-section .text-gray-600 {{
+                    font-size: 9.5pt !important;
+                    line-height: 1.1 !important;
+                    color: #384347 !important;
+                }}
+                /* Ajustes para las líneas divisorias */
+                hr.border-dashed {{
+                    margin-top: 4pt !important;
+                    margin-bottom: 4pt !important;
+                    border-top: 1px dashed #e5e7eb !important;
+                }}
+                .education-item, .experience-item {{
+                    margin-bottom: 8pt !important;
+                    padding: 0 !important;
+                }}
+                .education-item:last-child, .experience-item:last-child {{
+                    margin-bottom: 0 !important;
+                }}
+                .main-content-grid {{
                     display: grid !important;
-                    grid-template-columns: 2fr 1fr !important;
-                    gap: 1.5rem !important;
+                    grid-template-columns: 1.8fr 1.2fr !important;
+                    gap: 32pt !important;
                     width: 100% !important;
                     margin: 0 !important;
                     padding: 0 !important;
-                }
-                .left-column {
+                }}
+                .left-column {{
                     order: 1 !important;
                     width: 100% !important;
                     max-width: none !important;
                     margin: 0 !important;
                     padding: 0 !important;
-                }
-                .right-column {
+                }}
+                .right-column {{
                     order: 2 !important;
                     width: 100% !important;
                     max-width: none !important;
                     margin: 0 !important;
                     padding: 0 !important;
-                }
-                .profile-column {
+                }}
+                .profile-column {{
                     order: 2 !important;
-                }
-                * {
+                }}
+                section {{
+                    margin-bottom: 28pt !important;
+                }}
+                section:last-child {{
+                    margin-bottom: 0 !important;
+                }}
+                * {{
                     -webkit-print-color-adjust: exact !important;
                     print-color-adjust: exact !important;
-                }
-            }
+                }}
+            }}
         """)
 
         # Esperar a que el contenido esté listo
@@ -242,13 +359,14 @@ async def generate_cv_pdf():
                 print_background=True,
                 margin={
                     'top': '10mm',
-                    'right': '10mm',
+                    'right': '12mm',
                     'bottom': '10mm',
-                    'left': '10mm'
+                    'left': '12mm'
                 },
                 scale=0.95,
                 prefer_css_page_size=True,
                 display_header_footer=False,
+                page_ranges='1-2'  # Forzar solo 2 páginas
             )
             print(f"PDF generado exitosamente: {pdf_file_path}")
         except Exception as e_pdf:
