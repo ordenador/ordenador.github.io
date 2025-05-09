@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículum - Mario Faúndez</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #374151; 
+            font-size: 14px; 
+        }
+        .custom-blue {
+            color: #002878;
+        }
+        .custom-orange {
+            color: #ff6e1b;
+        }
+        .section-title {
+            font-weight: 700; 
+            color: #002878; 
+            padding-bottom: 0.3rem; 
+            border-bottom-width: 2px; 
+            border-color: #002878; 
+            margin-bottom: 1rem; 
+            font-size: 1.2rem; 
+            text-transform: uppercase;
+        }
+        .entry-title { 
+            font-weight: 600; 
+            font-size: 1rem; 
+            color: #1F2937; 
+            margin-bottom: 0.15rem; 
+        }
+        .institution-name {
+            font-weight: 600; 
+            color: #ff6e1b; 
+            font-size: 0.9rem; 
+            margin-bottom: 0.15rem; 
+        }
+        .meta-info {
+            display: flex;
+            flex-wrap: wrap; 
+            align-items: center;
+            font-size: 0.75rem; 
+            color: #6B7280; 
+            margin-bottom: 0.3rem; 
+        }
+        .meta-info span {
+            margin-right: 0.7rem; 
+            margin-bottom: 0.15rem; 
+            display: flex;
+            align-items: center;
+        }
+        .meta-info i {
+            margin-right: 0.25rem; 
+            color: #002878; 
+        }
+        .job-type { 
+            font-style: italic;
+            margin-right: 0.7rem; 
+            margin-bottom: 0.15rem;
+        }
+        .skill-tag {
+            background-color: #EEF2FF; 
+            color: #4338CA; 
+            padding: 0.15rem 0.5rem; 
+            border-radius: 0.375rem; 
+            font-size: 0.75rem; 
+            margin: 0.15rem; 
+            display: inline-block;
+            font-weight: 500; 
+        }
+        .header-icon-blue { 
+            color: #3B82F6; 
+        }
+
+        ul.description-list {
+            list-style-position: outside; 
+            padding-left: 1rem; 
+            font-size: 0.8rem; 
+            color: #4B5563; 
+            line-height: 1.4; 
+        }
+        ul.description-list li {
+             margin-bottom: 0.25rem; 
+        }
+        ul.description-list li a { 
+            color: #4B5563;
+            text-decoration: none;
+        }
+        ul.description-list li a:hover {
+            color: #002878;
+            text-decoration: underline;
+        }
+        ul.certification-list-items {
+            list-style: none; 
+            padding-left: 0;  
+            font-size: 0.8rem; 
+            color: #4B5563;     
+            line-height: 1.4; 
+        }
+        ul.certification-list-items li {
+            position: relative;
+            padding-left: 1rem; 
+            margin-bottom: 0.25rem; 
+        }
+        ul.certification-list-items li::before {
+            content: "-"; 
+            position: absolute;
+            left: 0;      
+            top: 0.05em;  
+            color: #4B5563; 
+        }
+        ul.certification-list-items li a { 
+            color: #4B5563;
+            text-decoration: none;
+        }
+        ul.certification-list-items li a:hover {
+            color: #002878; 
+            text-decoration: underline;
+        }
+
+        .main-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem; 
+        }
+        .contact-info a {
+            color: #4B5563; 
+        }
+        .contact-info a:hover {
+            color: #002878; 
+            text-decoration: underline;
+        }
+        .find-me-online-link {
+            color: #3B82F6; 
+        }
+        .find-me-online-link:hover {
+            color: #002878; 
+            text-decoration: underline;
+        }
+        
+        #downloadPdfBtn { 
+            background-color: #002878; 
+            color: white;
+            padding: 0.5rem 1rem; 
+            border-radius: 0.375rem; 
+            font-weight: 600; 
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem; 
+        }
+        #downloadPdfBtn:hover {
+            background-color: #001f5a; 
+        }
+        .generating-pdf #downloadPdfBtnContainer { 
+            display: none !important;
+        }
+
+        .pdf-avoid-break { 
+            page-break-inside: avoid !important;
+        }
+        .education-item, .experience-item, 
+        .profile-section, .findme-section, .skills-section, 
+        .languages-section, .certification-section, .interests-section {
+             page-break-inside: avoid !important;
+        }
+        hr.border-dashed {
+            margin-top: 0.75rem; 
+            margin-bottom: 0.75rem; 
+        }
+        section.mb-8 { margin-bottom: 1rem !important; } 
+        section.mb-6 { margin-bottom: 0.75rem !important; } 
+        section.mb-4 { margin-bottom: 0.5rem !important; } 
+        
+        /* Styles for PDF export mode - applied via JS */
+        .pdf-export-override {
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 !important; /* Remove padding that might constrain inner content */
+            box-shadow: none !important;
+            background: white !important;
+            border-radius: 0 !important;
+        }
+
+
+        @media (max-width: 768px) { 
+            .main-content-grid {
+                grid-template-columns: 1fr;
+            }
+            .profile-column {
+                order: -1;
+            }
+            body { font-size: 16px; } 
+            .section-title { font-size: 1.25rem; }
+            .entry-title { font-size: 1.1rem; }
+            .meta-info { font-size: 0.875rem; }
+        }
+
+        @media print { 
+            body {
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+                margin: 0;
+                padding: 0;
+                font-size: 9pt; 
+            }
+            .bg-gray-100 { background-color: white !important; }
+            .shadow-xl { box-shadow: none !important; }
+            #downloadPdfBtnContainer { display: none !important; } 
+            .main-content-grid {
+                grid-template-columns: 2fr 1fr !important; 
+            }
+            .pdf-avoid-break, .education-item, .experience-item, .profile-section, 
+            .findme-section, .skills-section, .languages-section, 
+            .certification-section, .interests-section {
+                page-break-inside: avoid !important;
+            }
+            #resumeContent { /* Ensure full width for print too */
+                 padding: 0 !important;
+                 margin: 0 !important;
+                 max-width: none !important;
+                 width: 100% !important;
+                 box-shadow: none !important;
+                 background: white !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 md:p-8">
+    <div id="downloadPdfBtnContainer" class="max-w-5xl mx-auto mb-6 flex justify-center md:justify-end">
+        <button id="downloadPdfBtn">
+            <i class="fas fa-file-pdf mr-2"></i>
+            Descargar PDF
+        </button>
+    </div>
+
+    <div id="resumeContent" class="max-w-5xl mx-auto bg-white shadow-xl rounded-lg p-6 md:p-10">
+        <header class="text-center mb-6 md:text-left md:flex md:items-center md:justify-between pdf-avoid-break">
+            <div>
+                <h1 class="text-3xl font-bold custom-blue">Mario Faúndez</h1> 
+                <h2 class="text-lg custom-blue mt-1">AI Platform Lead (GenOps Team Lead)</h2>
+            </div>
+            <div class="mt-4 md:mt-0 text-xs text-gray-600 text-right contact-info"> 
+                <div class="flex items-center justify-center md:justify-end mb-1">
+                    <i class="fas fa-phone header-icon-blue mr-2"></i>
+                    <span>+56 984-255-714</span>
+                </div>
+                <div class="flex items-center justify-center md:justify-end mb-1">
+                    <i class="fas fa-envelope header-icon-blue mr-2"></i>
+                    <a href="mailto:mariofaundezvidal@gmail.com">mariofaundezvidal@gmail.com</a>
+                </div>
+                <div class="flex items-center justify-center md:justify-end">
+                    <i class="fas fa-map-marker-alt header-icon-blue mr-2"></i>
+                    <span>Santiago, Chile</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content-grid">
+            <div class="left-column">
+                <section class="mb-6 education-section">
+                    <h3 class="section-title">Education</h3>
+                    <div class="mb-4 education-item">
+                        <p class="entry-title">Master's Degree in Artificial Intelligence</p>
+                        <p class="institution-name">Pontificia Universidad Católica de Chile</p>
+                        <div class="meta-info">
+                            <span><i class="fas fa-calendar-alt"></i>2021 - 2022</span>
+                            <span><i class="fas fa-map-marker-alt"></i>Santiago, Chile</span>
+                        </div>
+                    </div>
+                    <hr class="border-dashed border-gray-300">
+                    <div class="mb-4 education-item">
+                        <p class="entry-title">Diploma, Management and Evaluation of Computing Projects and Projects Management</p>
+                        <p class="institution-name">Universidad de Chile</p>
+                        <div class="meta-info">
+                            <span><i class="fas fa-calendar-alt"></i>06/2013 - 12/2013</span>
+                            <span><i class="fas fa-map-marker-alt"></i>Santiago, Chile</span>
+                        </div>
+                    </div>
+                    <hr class="border-dashed border-gray-300">
+                    <div class="education-item">
+                        <p class="entry-title">Civil Computer Engineering</p>
+                        <p class="institution-name">Universidad Tecnológica Metropolitana</p>
+                        <div class="meta-info">
+                            <span><i class="fas fa-calendar-alt"></i>2005 - 2010</span>
+                            <span><i class="fas fa-map-marker-alt"></i>Santiago, Chile</span>
+                        </div>
+                        <ul class="description-list">
+                            <li>Titled with distinction</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="mb-6 experience-section">
+                    <h3 class="section-title">Experience</h3>
+                    <div class="mb-4 experience-item">
+                        <p class="entry-title">AI Platform Lead (GenOps Team Lead)</p>
+                        <p class="institution-name">Falabella Financiero</p>
+                        <div class="meta-info">
+                            <span class="job-type">Full-time</span>
+                            <span><i class="fas fa-calendar-alt"></i>May 2024 - Present · 1 yr 1 mo</span>
+                            <span><i class="fas fa-map-marker-alt"></i>Santiago, Santiago Metropolitan Region, Chile · Hybrid</span>
+                        </div>
+                        <ul class="description-list">
+                            <li>Leader of the GenOps Initiative, responsible for designing the foundational architecture of a unified platform for AI developers at Falabella Financiero — empowering application teams to leverage Generative AI, simplifying access to diverse models, and enhancing security and cost management.</li>
+                        </ul>
+                    </div>
+                    <hr class="border-dashed border-gray-300">
+                    <div class="mb-4 experience-item">
+                        <p class="entry-title">DevOps Lead - R&D, Developer Experience Team</p>
+                        <p class="institution-name">Falabella Financiero</p>
+                        <div class="meta-info">
+                            <span class="job-type">Full-time</span>
+                            <span><i class="fas fa-calendar-alt"></i>11/2023 - 04/2024 · 6 mos</span>
+                            <span><i class="fas fa-map-marker-alt"></i>Santiago, Chile</span>
+                        </div>
+                        <ul class="description-list">
+                            <li>Leading teams responsible for Developer Experience, Platform Architecture Standards, and the evolution of internal tools platforms.</li>
+                            <li>Optimized and standardized deployment workflows.</li>
+                            <li>Evolved and managed internal tools.</li>
+                            <li>Generative Al product for extracting information from past incidents to enhance the knowledge base.</li>
+                        </ul>
+                    </div>
+                    <hr class="border-dashed border-gray-300">
+                    <div class="mb-4 experience-item">
+                        <p class="entry-title">DevOps Lead - R&D Team in Architecture</p>
+                        <p class="institution-name">Falabella Financiero</p>
+                        <div class="meta-info">
+                            <span class="job-type">Full-time</span>
+                            <span><i class="fas fa-calendar-alt"></i>11/2020 - 10/2023 · 3 yrs</span>
+                            <span><i class="fas fa-map-marker-alt"></i>Santiago, Chile</span>
+                        </div>
+                        <ul class="description-list">
+                            <li>Leading team that promote the adoption of the DevOps philosophy, foster collective intelligence, and empower teams to innovate and continuously improve for the benefit of the organization.</li>
+                            <li>Achieved cross-departmental synergies by facilitating collaborative efforts with 5 platform teams, enhancing teamwork and efficiency by eliminating duplicate efforts.</li>
+                            <li>Implemented and standardized Backstage (Internal Developer Portal).</li>
+                            <li>Definition of Kubernetes usage across all Falabella Financiero platform teams.</li>
+                        </ul>
+                    </div>
+                    <hr class="border-dashed border-gray-300">
+                     <div class="mb-4 experience-item">
+                        <p class="entry-title">DevOps Lead - New Technologies Team</p>
+                        <p class="institution-name">Falabella Financiero</p>
+                        <div class="meta-info">
+                           <span class="job-type">Full-time</span>
+                           <span><i class="fas fa-calendar-alt"></i>07/2019 - 10/2020 · 1 yr 4 mos</span>
+                           <span><i class="fas fa-map-marker-alt"></i>Santiago, Chile</span>
+                        </div>
+                        <ul class="description-list">
+                            <li>Leading team that improves and proposes new technologies so the components implementing DevOps accomplished the latest industry standards.</li>
+                            <li>Implemented advanced monitoring and alerts using Prometheus, enhancing system reliability.</li>
+                            <li>Encourage the use of Kubernetes.</li>
+                        </ul>
+                    </div>
+                    <hr class="border-dashed border-gray-300">
+                    <div class="mb-4 experience-item">
+                        <p class="entry-title">DevOps Engineer</p>
+                        <p class="institution-name">Falabella Financiero</p>
+                        <div class="meta-info">
+                            <span class="job-type">Full-time</span>
+                            <span><i class="fas fa-calendar-alt"></i>10/2017 - 06/2019 · 1 yr 9 mos</span>
+                            <span><i class="fas fa-map-marker-alt"></i>Santiago, Chile</span>
+                        </div>
+                        <ul class="description-list">
+                            <li>Advanced infrastructure automation using Terraform (8x speed increase).</li>
+                            <li>Secure and automated secrets management implementation.</li>
+                        </ul>
+                    </div>
+                    <hr class="border-dashed border-gray-300">
+                    <div class="mb-4 experience-item">
+                        <p class="entry-title">DevOps Consultant</p>
+                        <p class="institution-name">Finalis</p>
+                        <div class="meta-info">
+                            <span class="job-type">Full-time</span>
+                            <span><i class="fas fa-calendar-alt"></i>06/2020 - 07/2022 · 2 yrs 2 mos</span>
+                            <span><i class="fas fa-map-marker-alt"></i>Santiago, Chile</span>
+                        </div>
+                        <ul class="description-list">
+                            <li>Organized teams, enhanced process visibility, and provided technical guidance for best practices in DevOps Team.</li>
+                        </ul>
+                    </div>
+                    <hr class="border-dashed border-gray-300">
+                    <div class="mb-4 experience-item">
+                        <p class="entry-title">Sysadmin Engineer</p>
+                        <p class="institution-name">LATAM Airlines Group</p>
+                        <div class="meta-info">
+                            <span class="job-type">Full-time</span>
+                            <span><i class="fas fa-calendar-alt"></i>06/2016 - 10/2017 · 1 yr 5 mos</span>
+                            <span><i class="fas fa-map-marker-alt"></i>Santiago, Chile</span>
+                        </div>
+                        <ul class="description-list">
+                            <li>Support to developer teams in: infrastructure, CI/CD, all transversal tools.</li>
+                            <li>Manage Servers, delivery multiples environments to developers.</li>
+                            <li>Automation of manual procedures, for example: database maintaining, CMS maintaining.</li>
+                            <li>Administration of database MySQL in HA.</li>
+                        </ul>
+                    </div>
+                    <hr class="border-dashed border-gray-300">
+                    <div class="mb-4 experience-item">
+                        <p class="entry-title">Sysadmin Engineer</p>
+                        <p class="institution-name">Adessa Falabella</p>
+                        <div class="meta-info">
+                             <span class="job-type">Full-time</span>
+                            <span><i class="fas fa-calendar-alt"></i>06/2012 - 12/2015 · 3 yrs 7 mos</span>
+                            <span><i class="fas fa-map-marker-alt"></i>Santiago, Chile</span>
+                        </div>
+                        <ul class="description-list">
+                            <li>Linux and AIX administration, IBM Virtual I/O and storage support.</li>
+                            <li>Developed Bash and Python scripts, Nagios support.</li>
+                        </ul>
+                    </div>
+                     <hr class="border-dashed border-gray-300">
+                    <div class="experience-item"> 
+                        <p class="entry-title">Support Engineer</p>
+                        <p class="institution-name">ARS Servicios Profesionales</p>
+                        <div class="meta-info">
+                            <span class="job-type">Full-time</span>
+                            <span><i class="fas fa-calendar-alt"></i>06/2011 - 06/2012 · 1 yr 1 mo</span>
+                            <span><i class="fas fa-map-marker-alt"></i>Santiago, Chile</span>
+                        </div>
+                        <ul class="description-list">
+                            <li>Specialized support for critical systems and HP hardware.</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <div class="right-column profile-column">
+                <section class="mb-6 profile-section">
+                    <h3 class="section-title">Profile</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        I have built my career over 14 years in <strong>DevOps and Platform Engineering</strong>, focusing on creating scalable, resilient, and self-managed platforms that enhance time to market and product quality.
+                        <br><br>
+                        Currently, I lead initiatives that <strong>streamline Generative AI adoption</strong>, standardizing and simplifying technical complexity while ensuring governance and compliance. I am passionate about fostering collaborative work environments, expanding knowledge across teams, and promoting open-source contributions.
+                        <br><br>
+                        Continuously learning, I explore the latest technologies, tools, and frameworks to drive efficiency and innovation.
+                    </p>
+                </section>
+
+                <section class="mb-6 findme-section">
+                    <h3 class="section-title">Find me Online</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fab fa-linkedin text-xl mr-2"></i>
+                        <a href="https://www.linkedin.com/in/mariofaundez" target="_blank" class="find-me-online-link text-xs">linkedin.com/in/mariofaundez</a>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fab fa-github text-xl mr-2"></i>
+                        <a href="https://www.github.com/ordenador" target="_blank" class="find-me-online-link text-xs">github.com/ordenador</a>
+                    </div>
+                </section>
+
+                <section class="mb-6 skills-section">
+                    <h3 class="section-title">Skills</h3>
+                    <div class="mb-3">
+                        <h4 class="font-semibold text-gray-700 text-sm mb-1">Change Maker</h4>
+                        <span class="skill-tag">Team Lead</span>
+                        <span class="skill-tag">Agile</span>
+                        <span class="skill-tag">DevOps</span>
+                        <span class="skill-tag">Best Practices</span>
+                        <span class="skill-tag">Evolution strategy</span>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-700 text-sm mb-1">IT</h4>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">Infrastructure as Code</span>
+                        <span class="skill-tag">Cloud Native</span>
+                        <span class="skill-tag">Automation</span>
+                        <span class="skill-tag">GitLab CI</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Bash</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">GCP</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Containers</span>
+                        <span class="skill-tag">ArgoCD</span>
+                        <span class="skill-tag">AI LLM</span>
+                        <span class="skill-tag">RAG</span>
+                        <span class="skill-tag">AI Prompt</span>
+                        <span class="skill-tag">Gen AI</span>
+                        <span class="skill-tag">LLM Agents</span>
+                    </div>
+                </section>
+
+                 <section class="mb-6 languages-section">
+                    <h3 class="section-title">Languages</h3>
+                    <p class="text-gray-600 text-xs mb-0.5"><span class="font-semibold">English:</span> Advanced</p>
+                    <p class="text-gray-600 text-xs"><span class="font-semibold">Spanish:</span> Native</p>
+                </section>
+
+                <section class="mb-6 certification-section">
+                    <h3 class="section-title">Certification</h3>
+                    <div class="mb-3">
+                        <h4 class="font-semibold text-gray-700 text-sm mb-1">Coursera</h4>
+                        <ul class="certification-list-items">
+                            <li><a href="https://www.coursera.org/learn/gcp-infrastructure-scaling-automation" target="_blank" rel="noopener noreferrer">Elastic Cloud Infrastructure: Scaling and Automation</a></li>
+                            <li><a href="https://www.coursera.org/learn/app-deployment-debugging-performance" target="_blank" rel="noopener noreferrer">App Deployment, Debugging, and Performance</a></li>
+                            <li><a href="https://www.coursera.org/learn/architecting-with-google-kubernetes-engine" target="_blank" rel="noopener noreferrer">Architecting with Google Kubernetes Engine</a></li>
+                            <li><a href="https://www.coursera.org/learn/gcp-infrastructure-core-services" target="_blank" rel="noopener noreferrer">Essential Cloud Infrastructure: Core Services</a></li>
+                            <li><a href="https://www.coursera.org/learn/google-kubernetes-engine" target="_blank" rel="noopener noreferrer">Getting Started with Google Kubernetes Engine</a></li>
+                            <li><a href="https://www.coursera.org/learn/gcp-fundamentals" target="_blank" rel="noopener noreferrer">Google Cloud Platform Fundamentals: Core Infrastructure</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-700 text-sm mb-1">Qwiklabs</h4>
+                        <ul class="certification-list-items">
+                            <li><a href="https://www.cloudskillsboost.google/quests/29" target="_blank" rel="noopener noreferrer">Kubernetes Solutions</a></li>
+                            <li><a href="https://www.cloudskillsboost.google/quests/44" target="_blank" rel="noopener noreferrer">Managing Cloud Infrastructure with Terraform</a></li>
+                            <li><a href="https://www.cloudskillsboost.google/quests/31" target="_blank" rel="noopener noreferrer">Networking in the Google Cloud</a></li>
+                            <li><a href="https://www.cloudskillsboost.google/quests/55" target="_blank" rel="noopener noreferrer">BigQuery for Machine Learning</a></li>
+                            <li><a href="https://www.cloudskillsboost.google/quests/25" target="_blank" rel="noopener noreferrer">Data Engineering</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="interests-section">
+                    <h3 class="section-title">Interests</h3>
+                    <div>
+                        <span class="skill-tag">Learning</span>
+                        <span class="skill-tag">Technology</span>
+                        <span class="skill-tag">Music - Bass guitar</span>
+                        <span class="skill-tag">Games</span>
+                        <span class="skill-tag">Artificial Intelligence</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            if (typeof html2pdf === 'undefined') { 
+                console.error('Error: html2pdf.js library not loaded.');
+                const downloadButton = document.getElementById('downloadPdfBtn');
+                if(downloadButton) {
+                    downloadButton.textContent = 'Error al cargar librería PDF';
+                    downloadButton.disabled = true;
+                }
+                return;
+            }
+
+            document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+                const resumeContent = document.getElementById('resumeContent');
+                const downloadButtonContainer = document.getElementById('downloadPdfBtnContainer');
+                
+                // Store original styles
+                const originalStyles = {
+                    maxWidth: resumeContent.style.maxWidth,
+                    margin: resumeContent.style.margin,
+                    padding: resumeContent.style.padding,
+                    boxShadow: resumeContent.style.boxShadow,
+                    borderRadius: resumeContent.style.borderRadius,
+                    background: resumeContent.style.background
+                };
+
+                // Apply override styles for PDF generation
+                resumeContent.style.maxWidth = 'none';
+                resumeContent.style.margin = '0';
+                resumeContent.style.padding = '0'; // Crucial to remove padding for full width content
+                resumeContent.style.boxShadow = 'none';
+                resumeContent.style.borderRadius = '0';
+                resumeContent.style.background = 'white';
+                // Add a class that might contain further !important overrides if needed,
+                // but direct style manipulation is often more effective here.
+                // resumeContent.classList.add('pdf-export-override'); // Using direct styles instead
+
+                document.body.classList.add('generating-pdf'); 
+
+                const opt = {
+                    margin:       [10, 10, 10, 10], // 10mm margin on all sides
+                    filename:     'Mario_Faundez_CV.pdf',
+                    image:        { type: 'jpeg', quality: 0.98 }, 
+                    html2canvas:  { 
+                                    scale: 2, // Keep scale 2 for quality
+                                    logging: true, 
+                                    useCORS: true,
+                                    scrollX: 0, 
+                                    scrollY: 0
+                                    // No explicit width or windowWidth, let html2pdf handle it
+                                    // based on the (now modified) resumeContent element
+                                  },
+                    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                    pagebreak:    { mode: ['css', 'legacy'], avoid: '.pdf-avoid-break' }
+                };
+
+                html2pdf().from(resumeContent).set(opt).save()
+                    .then(() => {
+                        // Restore original styles
+                        resumeContent.style.maxWidth = originalStyles.maxWidth;
+                        resumeContent.style.margin = originalStyles.margin;
+                        resumeContent.style.padding = originalStyles.padding;
+                        resumeContent.style.boxShadow = originalStyles.boxShadow;
+                        resumeContent.style.borderRadius = originalStyles.borderRadius;
+                        resumeContent.style.background = originalStyles.background;
+                        // resumeContent.classList.remove('pdf-export-override');
+                        document.body.classList.remove('generating-pdf'); 
+                    })
+                    .catch((error) => {
+                        console.error('Error generating PDF with html2pdf:', error);
+                        // Restore original styles even on error
+                        resumeContent.style.maxWidth = originalStyles.maxWidth;
+                        resumeContent.style.margin = originalStyles.margin;
+                        resumeContent.style.padding = originalStyles.padding;
+                        resumeContent.style.boxShadow = originalStyles.boxShadow;
+                        resumeContent.style.borderRadius = originalStyles.borderRadius;
+                        resumeContent.style.background = originalStyles.background;
+                        // resumeContent.classList.remove('pdf-export-override');
+                        document.body.classList.remove('generating-pdf'); 
+                        alert('Hubo un error al generar el PDF. Por favor, inténtalo de nuevo.');
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
