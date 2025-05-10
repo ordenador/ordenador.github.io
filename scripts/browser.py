@@ -124,7 +124,7 @@ class BrowserManager:
             print("Las fuentes están cargadas.")
 
             # Generar PDF
-            pdf_file_path = OUTPUT_DIR / 'CV_Mario_Faundez_Playwright.pdf'
+            pdf_file_path = OUTPUT_DIR / 'mario_faundez_cv.pdf'
             print(f"Generando PDF en: {pdf_file_path}...")
             
             await self.page.pdf(

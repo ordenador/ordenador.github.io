@@ -172,7 +172,7 @@ body {
 }
 
 /* PDF download button styles */
-#downloadPdfBtn {
+.download-pdf-btn {
     background-color: #002878;
     color: white;
     padding: 0.5rem 1rem;
@@ -185,10 +185,13 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.3rem;
+    text-decoration: none;
 }
 
-#downloadPdfBtn:hover {
+.download-pdf-btn:hover {
     background-color: #001f5a;
+    color: white;
+    text-decoration: none;
 }
 
 .generating-pdf #downloadPdfBtnContainer {

@@ -7,7 +7,6 @@ node_modules/
 coverage/
 
 # Production
-dist/
 build/
 
 # Misc
@@ -54,7 +53,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Dependencias
-dist
 dist-ssr
 *.local
 
@@ -92,12 +90,10 @@ venv.bak/
 .python-version
 
 # Distribution / packaging
-dist/
 build/
 *.egg-info/
 .installed.cfg
 *.egg
 
 # Node
-dist/
 .DS_Store 

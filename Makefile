@@ -1,4 +1,4 @@
-.PHONY: install start build preview clean generate-pdf deploy update-deps update-packages lint
+.PHONY: install start build preview clean generate-pdf deploy update-deps update-packages lint install-python-deps
 
 # Instalar todas las dependencias
 install:
@@ -7,20 +7,22 @@ install:
 	uv pip install -r requirements.txt
 	. .venv/bin/activate && playwright install chromium
 
-# Actualizar todas las dependencias
-update-deps:
-	npm update
-	npm audit fix --force
-	npm install --force
+# Actualizar todas las dependencias de Python
+update-packages-python:
 	# Asegurar que el entorno virtual existe
 	uv venv
 	# Activar el entorno virtual y actualizar dependencias de Python
+	. .venv/bin/activate && uv pip install --upgrade pip
 	. .venv/bin/activate && uv pip install --upgrade -r requirements.txt
+	. .venv/bin/activate && uv pip freeze > requirements.txt
 
 # Actualizar package.json a las últimas versiones
-update-packages:
+update-packages-node:
 	npx npm-check-updates -u
 	npm install
+
+# Actualizar dependencias
+update-packages: update-packages-node update-packages-python
 
 # Iniciar el servidor de desarrollo
 start:
@@ -44,8 +46,13 @@ clean:
 	rm -rf node_modules 
 	rm -rf .venv
 
+# Instalar dependencias de Python
+install-python-deps:
+	uv venv
+	. .venv/bin/activate && uv pip install -r requirements.txt
+
 # Generar PDF del curriculum
-generate-pdf: build
+generate-pdf: build install-python-deps
 	. .venv/bin/activate && python3 scripts/generate_pdf.py 
 
 # Desplegar a GitHub Pages

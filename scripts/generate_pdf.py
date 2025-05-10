@@ -18,6 +18,7 @@ async def generate_cv_pdf():
     Genera un PDF de un CV renderizado por React.
     """
     browser_manager = BrowserManager()
+    temp_html = None
     
     try:
         # Crear directorio de salida si no existe
@@ -50,6 +51,13 @@ async def generate_cv_pdf():
         print(f"Ocurrió un error general no controlado: {e}")
     finally:
         await browser_manager.cleanup()
+        # Eliminar el archivo temporal si existe
+        if temp_html and temp_html.exists():
+            try:
+                temp_html.unlink()
+                print("Archivo temporal eliminado correctamente.")
+            except Exception as e:
+                print(f"Error al eliminar el archivo temporal: {e}")
 
 if __name__ == '__main__':
     print("Ejecutando el script de generación de PDF para el CV...")

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Header from './components/Header.jsx';
 import Education from './components/Education.jsx';
 import Experience from './components/Experience.jsx';
@@ -8,32 +8,21 @@ import Skills from './components/Skills.jsx';
 import Languages from './components/Languages.jsx';
 import Certifications from './components/Certifications.jsx';
 import Interests from './components/Interests.jsx';
-import { generatePDF } from './utils/pdfGenerator';
 
 function App() {
-  useEffect(() => {
-    const downloadBtn = document.getElementById('downloadPdfBtn');
-    if (downloadBtn) {
-      downloadBtn.addEventListener('click', async () => {
-        try {
-          await generatePDF();
-        } catch (error) {
-          alert('Error al generar el PDF: ' + error.message);
-        }
-      });
-    }
-  }, []);
-
   return (
     <div className="bg-gray-100 p-4 md:p-8">
       <div
         id="downloadPdfBtnContainer"
         className="max-w-5xl mx-auto mb-6 flex justify-center md:justify-end"
       >
-        <button id="downloadPdfBtn">
+        <a 
+          href="./mario_faundez_cv.pdf"
+          className="download-pdf-btn"
+        >
           <i className="fas fa-file-pdf mr-2"></i>
           Download PDF
-        </button>
+        </a>
       </div>
 
       <div
