@@ -5,7 +5,7 @@ from pathlib import Path
 
 # Configuración de rutas
 SCRIPT_DIR = Path(__file__).resolve().parent
-OUTPUT_DIR = (SCRIPT_DIR / '../dist').resolve()
+OUTPUT_DIR = (SCRIPT_DIR / '../docs').resolve()
 
 # Configuración del PDF
 PDF_CONFIG = {

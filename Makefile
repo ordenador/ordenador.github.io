@@ -42,7 +42,7 @@ lint:
 
 # Limpiar archivos generados
 clean:
-	rm -rf dist
+	rm -rf docs
 	rm -rf node_modules 
 	rm -rf .venv
 
@@ -68,7 +68,7 @@ deploy: build
 	# Limpiar la rama gh-pages
 	git rm -rf .
 	# Copiar los archivos generados
-	cp -r dist/* .
+	cp -r docs/* .
 	# Agregar y commitear los archivos generados
 	git add .
 	git commit -m "Deploy to GitHub Pages"

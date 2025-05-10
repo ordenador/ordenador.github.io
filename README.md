@@ -38,7 +38,7 @@ Genera los archivos estáticos para producción:
 make build
 ```
 
-Los archivos se generarán en el directorio `dist/`.
+Los archivos se generarán en el directorio `docs/`.
 
 ### `make preview`
 
@@ -58,7 +58,7 @@ Limpia los archivos generados:
 make clean
 ```
 
-Elimina los directorios `dist/` y `node_modules/`.
+Elimina los directorios `docs/` y `node_modules/`.
 
 ## Flujo de Trabajo Típico
 
@@ -105,8 +105,33 @@ Elimina los directorios `dist/` y `node_modules/`.
 
 ## Tecnologías Utilizadas
 
-- React 18
-- Vite
-- Tailwind CSS
+- React 19.1.0
+- Vite 6.3.5
+- Tailwind CSS 4.1.6
+- ESLint 9.26.0
+- Prettier 3.5.3
 - html2pdf.js (para exportación PDF)
 - Font Awesome (para iconos)
+
+## Herramientas de Calidad de Código
+
+El proyecto incluye configuración para mantener la calidad del código:
+
+### ESLint
+
+Configurado para detectar problemas en el código JavaScript/JSX:
+
+```bash
+npm run lint        # Verificar problemas
+npm run lint:fix    # Corregir problemas automáticamente
+```
+
+### Prettier
+
+Configurado para formatear el código de manera consistente:
+
+```bash
+npm run format      # Formatear código
+```
+
+La configuración de ESLint y Prettier está optimizada para trabajar en conjunto y mantener un estilo de código consistente en todo el proyecto.
