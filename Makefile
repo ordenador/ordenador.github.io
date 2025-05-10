@@ -1,4 +1,4 @@
-.PHONY: install start build preview clean generate-pdf deploy update-deps update-packages
+.PHONY: install start build preview clean generate-pdf deploy update-deps update-packages lint
 
 # Instalar todas las dependencias
 install:
@@ -33,6 +33,10 @@ build:
 # Previsualizar la versión de producción
 preview:
 	npm run preview
+
+# Ejecutar linter y formateador automáticamente
+lint:
+	npm run lint:fix && npm run format
 
 # Limpiar archivos generados
 clean:
