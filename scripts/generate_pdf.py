@@ -32,9 +32,10 @@ async def generate_cv_pdf():
         with open(html_file, 'r', encoding='utf-8') as f:
             html_content = f.read()
         
-        # Ajustar las rutas de los assets
-        html_content = html_content.replace('src="/assets/', f'src="file://{OUTPUT_DIR}/assets/')
-        html_content = html_content.replace('href="/assets/', f'href="file://{OUTPUT_DIR}/assets/')
+        # Ajustar las rutas de los assets para usar rutas absolutas
+        dist_path = str(OUTPUT_DIR.absolute())
+        html_content = html_content.replace('src="/assets/', f'src="file://{dist_path}/assets/')
+        html_content = html_content.replace('href="/assets/', f'href="file://{dist_path}/assets/')
         
         # Guardar el HTML modificado
         temp_html = OUTPUT_DIR / 'temp_index.html'

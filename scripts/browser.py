@@ -45,6 +45,10 @@ class BrowserManager:
                 file_path = url.replace('file://', '')
                 print(f"Intentando cargar archivo local: {file_path}")
                 
+                # Si la ruta es relativa, buscar en el directorio dist
+                if file_path.startswith('/assets/'):
+                    file_path = str(OUTPUT_DIR / file_path[1:])
+                
                 content_type = self._get_content_type(file_path)
                 
                 with open(file_path, 'rb') as f:
