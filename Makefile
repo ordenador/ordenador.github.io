@@ -55,23 +55,5 @@ install-python-deps:
 generate-pdf: build install-python-deps
 	. .venv/bin/activate && python3 scripts/generate_pdf.py 
 
-# Desplegar a GitHub Pages
-deploy: build
-	# Asegurarse de que estamos en la rama main
-	git checkout main
-	# Agregar y commitear los cambios del código fuente
-	git add .
-	git commit -m "Update source code" || true
-	git push origin main
-	# Crear o actualizar la rama gh-pages
-	git checkout -b gh-pages || git checkout gh-pages
-	# Limpiar la rama gh-pages
-	git rm -rf .
-	# Copiar los archivos generados
-	cp -r docs/* .
-	# Agregar y commitear los archivos generados
-	git add .
-	git commit -m "Deploy to GitHub Pages"
-	git push origin gh-pages --force
-	# Volver a la rama main
-	git checkout main 
+# Generar codigo estático en ./docs
+deploy: generate-pdf
