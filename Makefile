@@ -1,4 +1,4 @@
-.PHONY: install start build preview clean generate-pdf deploy check-code update-deps update-packages
+.PHONY: install start build preview clean generate-pdf deploy update-deps update-packages
 
 # Instalar todas las dependencias
 install:
@@ -26,12 +26,8 @@ update-packages:
 start:
 	npm run start
 
-# Verificar y formatear todo el código
-check-code:
-	npm run lint:fix && npm run format
-
 # Generar los archivos estáticos para producción
-build: check-code
+build:
 	npm run build
 
 # Previsualizar la versión de producción
