@@ -9,12 +9,11 @@ export const resumeData = {
     },
   },
   profile: {
-    text: `I have built my career over 14 years in <strong>DevOps and Platform Engineering</strong>, focusing on creating scalable, resilient, and self-managed platforms that enhance time to market and product quality.
+    text: `Professional with <strong>14+ years</strong> designing and operating <strong>scalable platforms</strong>. Today I lead the creation of an <strong>AI Developer Platform</strong> that accelerates <strong>generative AI</strong> adoption at scale, reinforces <strong>governance</strong>, and improves the <strong>developer experience</strong>. Building on a <strong>solid background</strong> in <strong>DevOps</strong> and <strong>Platform Engineering</strong>, I now lead <strong>AI‑focused teams</strong> that translate business needs into simple, secure, and reusable technological capabilities.
 
-Currently, I lead initiatives that <strong>streamline Generative AI adoption</strong>, standardizing and simplifying technical complexity while ensuring governance and compliance. I am passionate about fostering collaborative work environments, expanding knowledge across teams, and promoting open-source contributions.
-
-Continuously learning, I explore the latest technologies, tools, and frameworks to drive efficiency and innovation.`,
+  My focus is on enabling teams: I align visions, define clear working frameworks, and create spaces for <strong>collaboration</strong> and <strong>continuous learning</strong>. I promote <strong>open‑source contribution</strong> and <strong>continuous improvement</strong>. I am constantly seeking tools and practices that reduce <strong>time‑to‑value</strong>, optimize costs, and ensure the <strong>quality</strong> and <strong>reliability</strong> of AI‑based solutions.`,
   },
+
   socialLinks: [
     {
       platform: 'linkedin',
