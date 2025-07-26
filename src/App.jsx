@@ -16,10 +16,7 @@ function App() {
         id="downloadPdfBtnContainer"
         className="max-w-5xl mx-auto mb-6 flex justify-center md:justify-end"
       >
-        <a 
-          href="./mario_faundez_cv.pdf"
-          className="download-pdf-btn"
-        >
+        <a href="./mario_faundez_cv.pdf" className="download-pdf-btn">
           <i className="fas fa-file-pdf mr-2"></i>
           Download PDF
         </a>

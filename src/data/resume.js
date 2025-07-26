@@ -9,9 +9,9 @@ export const resumeData = {
     },
   },
   profile: {
-    text: `Professional with <strong>14+ years</strong> designing and operating <strong>scalable platforms</strong>. Today I lead the creation of an <strong>AI Developer Platform</strong> that accelerates <strong>generative AI</strong> adoption at scale, reinforces <strong>governance</strong>, and improves the <strong>developer experience</strong>. Building on a <strong>solid background</strong> in <strong>DevOps</strong> and <strong>Platform Engineering</strong>, I now lead <strong>AI‑focused teams</strong> that translate business needs into simple, secure, and reusable technological capabilities.
+    text: `Professional with <strong>14+ years</strong> designing and operating scalable platforms. Today I lead the creation of an <strong>AI Developer Platform</strong> that accelerates generative AI adoption at scale, reinforces governance, and improves the developer experience. Building on a solid background in DevOps and <strong>Platform Engineering</strong>, I now lead AI‑focused teams that translate business needs into simple, secure, and reusable technological capabilities.
 
-  My focus is on enabling teams: I align visions, define clear working frameworks, and create spaces for <strong>collaboration</strong> and <strong>continuous learning</strong>. I promote <strong>open‑source contribution</strong> and <strong>continuous improvement</strong>. I am constantly seeking tools and practices that reduce <strong>time‑to‑value</strong>, optimize costs, and ensure the <strong>quality</strong> and <strong>reliability</strong> of AI‑based solutions.`,
+  My focus is on enabling teams: I align visions, define clear working frameworks, and create spaces for collaboration and continuous learning. I promote open‑source contribution and continuous improvement. I am constantly seeking tools and practices that reduce time‑to‑value, optimize costs, and ensure the <strong>quality and reliability</strong> of AI‑based solutions.`,
   },
 
   socialLinks: [
