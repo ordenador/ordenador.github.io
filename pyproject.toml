@@ -1,0 +1,13 @@
+[project]
+name = "app"
+version = "0.1.0"
+description = "Resume PDF generator"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "greenlet==3.0.3",
+    "pip==25.1.1",
+    "playwright==1.42.0",
+    "pyee==11.0.1",
+    "typing-extensions==4.13.2",
+]

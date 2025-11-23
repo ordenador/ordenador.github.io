@@ -3,18 +3,12 @@
 # Instalar todas las dependencias
 install:
 	npm install
-	uv venv
-	uv pip install -r requirements.txt
+	uv sync
 	. .venv/bin/activate && playwright install chromium
 
 # Actualizar todas las dependencias de Python
 update-packages-python:
-	# Asegurar que el entorno virtual existe
-	uv venv
-	# Activar el entorno virtual y actualizar dependencias de Python
-	. .venv/bin/activate && uv pip install --upgrade pip
-	. .venv/bin/activate && uv pip install --upgrade -r requirements.txt
-	. .venv/bin/activate && uv pip freeze > requirements.txt
+	uv lock --upgrade
 
 # Actualizar package.json a las últimas versiones
 update-packages-node:
@@ -48,8 +42,7 @@ clean:
 
 # Instalar dependencias de Python
 install-python-deps:
-	uv venv
-	. .venv/bin/activate && uv pip install -r requirements.txt
+	uv sync
 
 # Generar PDF del curriculum
 generate-pdf: build install-python-deps
