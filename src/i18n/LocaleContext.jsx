@@ -11,7 +11,13 @@ function initialLocale() {
   if (param === 'en' || param === 'es') return param;
   const stored = localStorage.getItem('lang');
   if (stored === 'en' || stored === 'es') return stored;
-  return navigator.language?.toLowerCase().startsWith('es') ? 'es' : 'en';
+  // First browser-preferred language we support wins (navigator.languages
+  // is the ordered Accept-Language list; language ≠ location, so no geo-IP).
+  for (const lang of navigator.languages ?? [navigator.language]) {
+    const base = lang?.slice(0, 2).toLowerCase();
+    if (base === 'es' || base === 'en') return base;
+  }
+  return 'en';
 }
 
 export function LocaleProvider({ children }) {
