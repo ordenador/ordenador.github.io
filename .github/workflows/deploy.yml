@@ -74,3 +74,9 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+        # El backend de Pages falla esporádicamente con "try again later"
+        continue-on-error: true
+
+      - id: deployment-retry
+        if: steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v4
