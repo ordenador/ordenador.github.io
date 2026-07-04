@@ -6,7 +6,7 @@ import { resumeData as es } from '../resume.es';
 const experienceOverrides = {
   0: {
     responsibilities: [
-      'Lidero la AI Developer Platform del Grupo Falabella (plataforma agéntica interna) - equipo, roadmap y arquitectura - que entrega capacidades de IA generativa y agentes autogestionadas por los equipos de desarrollo, con gobernanza, observabilidad y control de acceso y consumo integrados.',
+      'Lidero la AI Developer Platform del Grupo Falabella (equipo, roadmap y arquitectura): una plataforma multi-tenant donde los equipos crean, despliegan y operan aplicaciones y agentes de IA generativa en autoservicio, con acceso gobernado a modelos, permisos granulares, trazabilidad de uso y control de costos.',
       'Construyo y lidero el equipo de la plataforma, definiendo perfiles especializados (ingenieros de plataforma IA, arquitectos de agentes, DevSecOps) y gestionando recursos internos y externos.',
       'Asesoro iniciativas de IA de distintas áreas en conjunto con arquitectos GenAI: definimos estándares técnicos comunes y ajustamos el roadmap de la plataforma para que se apliquen a través de ella.',
       'Lidero la habilitación de agentes e integraciones vía MCP en la plataforma, para casos de uso de retail y financieros, acelerando el time-to-value.',
