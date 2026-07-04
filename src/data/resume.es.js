@@ -9,10 +9,11 @@ const experienceEs = [
     company: 'Grupo Falabella',
     workType: 'Híbrido',
     responsibilities: [
-      'Lidero el desarrollo y la dirección técnica de la AI Developer Platform del Grupo Falabella, enfocada en escalar IA generativa y capacidades agénticas en toda la organización.',
-      'Impulso la arquitectura de plataforma, los estándares técnicos y el delivery para ayudar a los equipos a construir, integrar y operar soluciones de IA seguras, gobernadas, escalables y listas para producción.',
-      'Mejoro la experiencia de desarrollo, estandarizo integraciones de IA y acelero la adopción de IA generativa, asistentes y soluciones basadas en agentes en casos de uso de retail y financieros.',
-      'Lidero la iniciativa InnerSource de Kairos, creando un roadmap colaborativo y construyendo puentes entre equipos para escalar la plataforma de IA y agentes en la organización.',
+      'Lidero Kairos, la AI Developer Platform (plataforma agéntica) del Grupo Falabella: multi-tenant, donde los equipos crean, despliegan y operan aplicaciones y agentes de IA generativa en autoservicio, con acceso gobernado a modelos, permisos granulares, trazabilidad de uso y control de costos.',
+      'Habilito capacidades de IA para los equipos de la compañía, coordinando un equipo multidisciplinario (ingenieros de plataforma IA, arquitectos de agentes, DevSecOps) y recursos internos y externos.',
+      'Asesoro iniciativas de IA de distintas áreas en conjunto con arquitectos GenAI: definimos estándares técnicos comunes y ajustamos el roadmap de la plataforma para que se apliquen a través de ella.',
+      'Impulso la estandarización de agentes e integraciones vía MCP en la plataforma, definiendo una vía gobernada para su adopción en casos de uso de retail y financieros.',
+      'Promuevo el desarrollo de capacidades de IA en toda la organización mediante la iniciativa InnerSource de Kairos, fomentando una cultura de decisiones basadas en datos e impulsando a la compañía a ser AI-driven.',
     ],
   },
   {
@@ -20,25 +21,26 @@ const experienceEs = [
     duration: '1 año 10 meses',
     workType: 'Híbrido',
     responsibilities: [
-      'Líder de la iniciativa GenOps, responsable de diseñar la arquitectura fundacional de una plataforma unificada para desarrolladores de IA en Falabella Financiero — habilitando a los equipos de aplicaciones para aprovechar IA generativa, simplificando el acceso a diversos modelos y mejorando la seguridad y la gestión de costos.',
+      'Líder de la iniciativa GenOps: diseño de la arquitectura fundacional de una plataforma unificada de IA para Falabella Financiero - simplificando el acceso a diversos modelos y reforzando la seguridad, privacidad y gestión de costos del consumo de datos e IA.',
+      'Expositor en Google Cloud Summit Chile 2025 ("Reimaginando la experiencia del cliente con IA conversacional: el caso de Banco Falabella"): soluciones conversacionales sobre Kairos, escaladas de forma segura en el canal WhatsApp del banco para flujos críticos de atención.',
     ],
   },
   {
     duration: '1 año 6 meses',
     responsibilities: [
-      'Liderazgo de los equipos responsables de Developer Experience, estándares de arquitectura de plataforma y la evolución de las plataformas de herramientas internas.',
-      'Optimización y estandarización de los flujos de despliegue.',
-      'Evolución y gestión de herramientas internas.',
-      'Producto de IA generativa para extraer información de incidentes pasados y potenciar la base de conocimiento.',
+      'Liderazgo de los equipos de Developer Experience y estándares de arquitectura de plataforma, con foco en eficiencia operacional.',
+      'Rediseño y automatización de procesos de despliegue, eliminando tareas manuales e ineficiencias y capturando eficiencias anuales.',
+      'Producto de IA generativa que extrae conocimiento de incidentes pasados, reduciendo tiempos de resolución y fortaleciendo la base de conocimiento.',
+      'Evolución y gestión del portafolio de herramientas internas, optimizando el consumo de recursos y presupuesto.',
     ],
   },
   {
     duration: '3 años',
     responsibilities: [
-      'Liderazgo del equipo que promueve la adopción de la filosofía DevOps, fomenta la inteligencia colectiva y empodera a los equipos para innovar y mejorar continuamente en beneficio de la organización.',
-      'Sinergias entre áreas facilitando la colaboración con 5 equipos de plataforma, mejorando el trabajo conjunto y eliminando esfuerzos duplicados.',
-      'Implementación y estandarización de Backstage (portal interno para desarrolladores).',
-      'Definición del uso de Kubernetes para todos los equipos de plataforma de Falabella Financiero.',
+      'Liderazgo del equipo que promueve la adopción de la filosofía DevOps y la mejora continua de procesos en beneficio de la organización.',
+      'Sinergias entre áreas facilitando la colaboración con 5 equipos de plataforma, estandarizando procesos y eliminando esfuerzos duplicados.',
+      'Implementación y estandarización de Backstage (portal interno de desarrolladores), habilitando el autoservicio y mejorando la experiencia de acceso a la información.',
+      'Definición del uso de Kubernetes para todos los equipos de plataforma de Falabella Financiero, en coordinación con proveedores tecnológicos.',
     ],
   },
   {
@@ -83,9 +85,9 @@ const experienceEs = [
 export const resumeData = {
   ...en,
   profile: {
-    text: `Profesional con <strong>más de 15 años</strong> diseñando y operando plataformas escalables. Hoy lidero el desarrollo y la dirección técnica de la <strong>AI Developer Platform</strong> del Grupo Falabella, escalando IA generativa y <strong>capacidades agénticas</strong> en toda la organización, reforzando la gobernanza y mejorando la experiencia de desarrollo. Con una base sólida en DevOps y <strong>Platform Engineering</strong>, lidero equipos enfocados en IA que traducen necesidades de negocio en capacidades tecnológicas simples, seguras y reutilizables.
+    text: `Profesional con <strong>más de 15 años</strong> liderando plataformas tecnológicas y equipos de alto desempeño. Hoy estoy a cargo de Kairos, la <strong>AI Developer Platform</strong> del Grupo Falabella, con la que los equipos adoptan <strong>inteligencia artificial</strong> de forma autogestionada, segura y <strong>gobernada</strong>, automatizando procesos con IA generativa y agentes. Combino un Magíster en Inteligencia Artificial con una base sólida en DevOps y <strong>Platform Engineering</strong> para transformar necesidades de negocio en soluciones escalables y medibles.
 
-  Mi foco está en habilitar equipos: alineo visiones, defino marcos de trabajo claros y creo espacios de colaboración y aprendizaje continuo. Promuevo la contribución open source y la mejora continua. Busco constantemente herramientas y prácticas que reduzcan el time-to-value, optimicen costos y aseguren la <strong>calidad y confiabilidad</strong> de las soluciones basadas en IA.`,
+  Mi foco está en la <strong>captura de valor</strong>: eficiencia operacional, control de costos, modelos operativos claros y desarrollo de capacidades organizacionales. Fomento la colaboración entre áreas, la mejora continua y las decisiones basadas en datos.`,
   },
   education: [
     {
@@ -109,6 +111,31 @@ export const resumeData = {
     },
   ],
   experience: en.experience.map((exp, i) => ({ ...exp, ...experienceEs[i] })),
+  skills: {
+    'Change Maker': [
+      'Estrategia de IA',
+      'Gobierno de datos e IA',
+      'Automatización de procesos',
+      'Excelencia operacional',
+      'Gestión de proveedores',
+      'Liderazgo de equipos',
+      'InnerSource',
+      'Agile / DevOps',
+    ],
+    IT: [
+      'IA Generativa',
+      'LLMs · RAG',
+      'Agentes IA · MCP',
+      'Plataformas de datos e IA',
+      'CI/CD',
+      'Infraestructura como código',
+      'Kubernetes',
+      'GCP · AWS · Azure',
+      'Python',
+      'Terraform',
+      'FinOps / control de costos',
+    ],
+  },
   languages: [
     { name: 'Inglés', level: 'Avanzado' },
     { name: 'Español', level: 'Nativo' },

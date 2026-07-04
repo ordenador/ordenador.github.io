@@ -9,9 +9,9 @@ export const resumeData = {
     },
   },
   profile: {
-    text: `Professional with <strong>15+ years</strong> designing and operating scalable platforms. Today I lead the development and technical direction of the <strong>AI Developer Platform</strong> at Falabella Group, scaling generative AI and <strong>agentic capabilities</strong> across the organization, reinforcing governance, and improving the developer experience. Building on a solid background in DevOps and <strong>Platform Engineering</strong>, I lead AI‑focused teams that translate business needs into simple, secure, and reusable technological capabilities.
+    text: `Professional with <strong>15+ years</strong> leading technology platforms and high-performing teams. Today I am in charge of Kairos, Falabella Group's <strong>AI Developer Platform</strong>, through which teams adopt <strong>artificial intelligence</strong> in a self-service, secure, and <strong>governed</strong> way, automating processes with generative AI and agents. I combine a Master's in Artificial Intelligence with a solid background in DevOps and <strong>Platform Engineering</strong> to turn business needs into scalable, measurable solutions.
 
-  My focus is on enabling teams: I align visions, define clear working frameworks, and create spaces for collaboration and continuous learning. I promote open‑source contribution and continuous improvement. I am constantly seeking tools and practices that reduce time‑to‑value, optimize costs, and ensure the <strong>quality and reliability</strong> of AI‑based solutions.`,
+  My focus is on <strong>value capture</strong>: operational efficiency, cost control, clear operating models, and the development of organizational capabilities. I foster cross-team collaboration, continuous improvement, and data-driven decisions.`,
   },
 
   socialLinks: [
@@ -56,10 +56,11 @@ export const resumeData = {
       location: 'Santiago, Chile',
       workType: 'Hybrid',
       responsibilities: [
-        'Leading the development and technical direction of the AI Developer Platform at Falabella Group, focused on scaling Generative AI and agentic capabilities across the organization.',
-        'Driving platform architecture, technical standards, and delivery to help teams build, integrate, and operate secure, governed, scalable, and production-ready AI solutions.',
-        'Improving developer experience, standardizing AI integrations, and accelerating the adoption of Generative AI, assistants, and agent-based solutions across retail and financial use cases.',
-        'Leading the InnerSource initiative for Kairos, creating a collaborative roadmap and building bridges between teams to scale the AI Developer and Agentic Platform across the organization.',
+        "I lead Kairos, Falabella Group's AI Developer Platform (agentic platform): multi-tenant, where teams create, deploy, and operate generative AI applications and agents in self-service, with governed access to models, fine-grained permissions, usage traceability, and cost control.",
+        'I enable AI capabilities for teams across the company, coordinating a multidisciplinary team (AI platform engineers, agent architects, DevSecOps) and internal and external resources.',
+        'I advise AI initiatives from different areas together with GenAI architects: we define shared technical standards and adjust the platform roadmap so they are applied through it.',
+        'I drive the standardization of agents and integrations via MCP on the platform, defining a governed path for their adoption across retail and financial use cases.',
+        'I promote the development of AI capabilities across the organization through the Kairos InnerSource initiative, fostering a data-driven culture and pushing the company to become AI-driven.',
       ],
     },
     {
@@ -70,7 +71,8 @@ export const resumeData = {
       location: 'Santiago, Chile',
       workType: 'Hybrid',
       responsibilities: [
-        'Leader of the GenOps Initiative, responsible for designing the foundational architecture of a unified platform for AI developers at Falabella Financiero — empowering application teams to leverage Generative AI, simplifying access to diverse models, and enhancing security and cost management.',
+        'Leader of the GenOps Initiative: designed the foundational architecture of a unified AI platform for Falabella Financiero - simplifying access to diverse models and strengthening the security, privacy, and cost management of data and AI consumption.',
+        'Speaker at Google Cloud Summit Chile 2025 ("Reimagining customer experience with conversational AI: the Banco Falabella case"): conversational solutions on Kairos, securely scaled on the bank\'s WhatsApp channel for critical service flows.',
       ],
     },
     {
@@ -80,10 +82,10 @@ export const resumeData = {
       duration: '1 yr 6 mos',
       location: 'Santiago, Chile',
       responsibilities: [
-        'Leading teams responsible for Developer Experience, Platform Architecture Standards, and the evolution of internal tools platforms.',
-        'Optimized and standardized deployment workflows.',
-        'Evolved and managed internal tools.',
-        'Generative Al product for extracting information from past incidents to enhance the knowledge base.',
+        'Led the Developer Experience teams and platform architecture standards, focused on operational efficiency.',
+        'Redesigned and automated deployment processes, removing manual tasks and inefficiencies and capturing yearly efficiencies.',
+        'Generative AI product that mines knowledge from past incidents, reducing resolution times and strengthening the knowledge base.',
+        'Evolved and managed the internal tooling portfolio, optimizing resource and budget consumption.',
       ],
     },
     {
@@ -93,10 +95,10 @@ export const resumeData = {
       duration: '3 yrs',
       location: 'Santiago, Chile',
       responsibilities: [
-        'Leading team that promote the adoption of the DevOps philosophy, foster collective intelligence, and empower teams to innovate and continuously improve for the benefit of the organization.',
-        'Achieved cross-departmental synergies by facilitating collaborative efforts with 5 platform teams, enhancing teamwork and efficiency by eliminating duplicate efforts.',
-        'Implemented and standardized Backstage (Internal Developer Portal).',
-        'Definition of Kubernetes usage across all Falabella Financiero platform teams.',
+        'Led the team promoting DevOps adoption and continuous process improvement for the benefit of the organization.',
+        'Cross-area synergies facilitating collaboration with 5 platform teams, standardizing processes and eliminating duplicated efforts.',
+        'Implemented and standardized Backstage (internal developer portal), enabling self-service and improving access to information.',
+        'Defined Kubernetes usage across all Falabella Financiero platform teams, in coordination with technology vendors.',
       ],
     },
     {
@@ -159,36 +161,27 @@ export const resumeData = {
   ],
   skills: {
     'Change Maker': [
-      'Team Lead',
       'AI Strategy',
-      'Engineering Management',
+      'Data & AI Governance',
+      'Process Automation',
+      'Operational Excellence',
+      'Vendor Management',
+      'Team Leadership',
       'InnerSource',
-      'Agile',
-      'DevOps',
-      'Best Practices',
-      'Evolution strategy',
+      'Agile / DevOps',
     ],
     IT: [
+      'Generative AI',
+      'LLMs · RAG',
+      'AI Agents · MCP',
+      'Data & AI Platforms',
       'CI/CD',
       'Infrastructure as Code',
-      'Cloud Native',
-      'Automation',
-      'GitLab CI',
-      'Python',
-      'Bash',
-      'Terraform',
-      'Linux',
-      'Azure',
-      'GCP',
-      'AWS',
       'Kubernetes',
-      'Containers',
-      'ArgoCD',
-      'AI LLM',
-      'RAG',
-      'AI Prompt',
-      'Gen AI',
-      'LLM Agents',
+      'GCP · AWS · Azure',
+      'Python',
+      'Terraform',
+      'FinOps / cost control',
     ],
   },
   languages: [
