@@ -9,7 +9,7 @@ const experienceOverrides = {
       'Lidero el desarrollo y la dirección técnica de la plataforma interna de IA del Grupo Falabella (Internal Developer Platform), que entrega capacidades de IA generativa y agentes autogestionadas por los equipos de desarrollo.',
       'Apoyo y asesoro iniciativas de IA de distintas áreas en conjunto con arquitectos GenAI, promoviendo estándares técnicos y buenas prácticas para soluciones seguras, gobernadas y escalables.',
       'Lidero la habilitación de agentes e integraciones (incluyendo MCP) y técnicas de uso de contexto (RAG) para casos de uso de retail y financieros, acelerando el time-to-value.',
-      'Impulso el desarrollo de capacidades de IA en toda la organización mediante la iniciativa InnerSource de Kairos: roadmap colaborativo entre equipos y una cultura de decisiones basada en datos.',
+      'Promuevo el desarrollo de capacidades de IA en toda la organización mediante la iniciativa InnerSource de Kairos, fomentando una cultura de decisiones basadas en datos e impulsando a la compañía a ser AI-driven.',
     ],
   },
   1: {
