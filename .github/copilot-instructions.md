@@ -10,16 +10,16 @@ Este archivo guía al agente de IA (Copilot) para trabajar de forma segura y efi
 
 ## 2. Flujo de Construcción y Validación
 
-| Objetivo | Comando | Precondiciones | Postcondiciones |
-|----------|---------|----------------|-----------------|
-| **Instalar** | `make install` | Node ≥ 20, Python ≥ 3.10, `uv` | npm packages, venv Python, Playwright browsers, `docs/` vacío |
-| **Lint** | `make lint` | Dependencias instaladas | Código formateado y sin errores de lint |
-| **Build** | `make build` | Lint sin errores | Sitio estático en `docs/` |
-| **Generar PDF** | `make generate-pdf` | Build exitoso | `docs/mario_faundez_cv.pdf` creado |
-| **Deploy** | `make deploy` | Build + PDF | `docs/` listo para GitHub Pages |
-| **Actualizar dependencias** | `make update-packages` | Ninguna | Node y Python actualizados |
+| Objetivo                    | Comando                | Precondiciones                 | Postcondiciones                                               |
+| --------------------------- | ---------------------- | ------------------------------ | ------------------------------------------------------------- |
+| **Instalar**                | `make install`         | Node ≥ 20, Python ≥ 3.10, `uv` | npm packages, venv Python, Playwright browsers, `docs/` vacío |
+| **Lint**                    | `make lint`            | Dependencias instaladas        | Código formateado y sin errores de lint                       |
+| **Build**                   | `make build`           | Lint sin errores               | Sitio estático en `docs/`                                     |
+| **Generar PDF**             | `make generate-pdf`    | Build exitoso                  | `docs/mario_faundez_cv.pdf` creado                            |
+| **Deploy**                  | `make deploy`          | Build + PDF                    | `docs/` listo para GitHub Pages                               |
+| **Actualizar dependencias** | `make update-packages` | Ninguna                        | Node y Python actualizados                                    |
 
-> **Nota**: Si un comando falla, consulte la sección *Errores Comunes* antes de buscar en el código.
+> **Nota**: Si un comando falla, consulte la sección _Errores Comunes_ antes de buscar en el código.
 
 ## 3. Errores Comunes
 
@@ -65,20 +65,20 @@ README.md
 2. **Modificaciones**: Después de cambiar código, ejecute `make lint`.
 3. **Validación**: Verifique que el sitio se construya con `make build`.
 4. **PDF**: Asegúrese de que el PDF se genere con `make generate-pdf`.
-5. **Errores**: Si algo falla, consulte la sección *Errores Comunes*.
+5. **Errores**: Si algo falla, consulte la sección _Errores Comunes_.
 6. **Pull Requests**: Mantenga cada PR enfocado en una única mejora lógica.
 
 ## 7. Buenas Prácticas de Desarrollo
 
 ### SOLID
 
-| Principio | Aplicación en este proyecto |
-|-----------|-----------------------------|
+| Principio                     | Aplicación en este proyecto                                                                        |
+| ----------------------------- | -------------------------------------------------------------------------------------------------- |
 | **S** (Single Responsibility) | Cada componente React debe tener una única responsabilidad; los scripts deben hacer una sola cosa. |
-| **O** (Open/Closed) | Extienda componentes con props y hooks sin modificar su código interno. |
-| **L** (Liskov Substitution) | Si se crean componentes hijos, deben ser intercambiables con el padre sin romper la lógica. |
-| **I** (Interface Segregation) | Exponer solo las props necesarias; evitar interfaces monolíticas. |
-| **D** (Dependency Inversion) | Inyectar dependencias (por ejemplo, servicios de API) a través de contextos o hooks. |
+| **O** (Open/Closed)           | Extienda componentes con props y hooks sin modificar su código interno.                            |
+| **L** (Liskov Substitution)   | Si se crean componentes hijos, deben ser intercambiables con el padre sin romper la lógica.        |
+| **I** (Interface Segregation) | Exponer solo las props necesarias; evitar interfaces monolíticas.                                  |
+| **D** (Dependency Inversion)  | Inyectar dependencias (por ejemplo, servicios de API) a través de contextos o hooks.               |
 
 ### DRY (Don’t Repeat Yourself)
 

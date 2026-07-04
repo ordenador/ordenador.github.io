@@ -1,6 +1,6 @@
 {
   "name": "resume",
-  "packageManager": "pnpm@10.30.3",
+  "packageManager": "pnpm@11.9.0",
   "version": "1.0.0",
   "type": "module",
   "description": "Mario Faúndez's Resume",

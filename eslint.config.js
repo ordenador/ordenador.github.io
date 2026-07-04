@@ -20,16 +20,16 @@ export default [
         ...browserGlobals,
         ...globals.node,
         module: 'readonly',
-        require: 'readonly'
+        require: 'readonly',
       },
       parserOptions: {
         ecmaFeatures: {
-          jsx: true
-        }
-      }
+          jsx: true,
+        },
+      },
     },
     plugins: {
-      'react-hooks': reactHooksPlugin
+      'react-hooks': reactHooksPlugin,
     },
     rules: {
       'no-unused-vars': 'warn',
@@ -41,8 +41,8 @@ export default [
       'no-trailing-spaces': 'error',
       'eol-last': 'error',
       'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn'
-    }
+      'react-hooks/exhaustive-deps': 'warn',
+    },
   },
-  prettierConfig
+  prettierConfig,
 ];

@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help install start build preview clean generate-pdf deploy update-deps update-packages lint install-python-deps
+.PHONY: help install start build preview clean generate-pdf deploy update-deps update-packages lint install-python-deps precommit precommit-install
 
 # Default target - mostrar ayuda
 help:
@@ -11,6 +11,8 @@ help:
 	@echo "  make build                - Generar archivos estáticos para producción"
 	@echo "  make preview              - Previsualizar versión de producción"
 	@echo "  make lint                 - Ejecutar linter y formateador"
+	@echo "  make precommit            - Ejecutar pre-commit en todos los archivos"
+	@echo "  make precommit-install    - Instalar el hook de git de pre-commit"
 	@echo "  make generate-pdf         - Generar PDF del curriculum"
 	@echo "  make deploy               - Build + generar PDF (listo para GitHub Pages)"
 	@echo "  make update-packages      - Actualizar todas las dependencias"
@@ -24,6 +26,7 @@ install:
 	pnpm install
 	uv sync
 	. .venv/bin/activate && playwright install chromium
+	. .venv/bin/activate && pre-commit install
 
 # Actualizar todas las dependencias de Python
 update-packages-python:
@@ -56,10 +59,18 @@ preview:
 lint:
 	pnpm run lint:fix && pnpm run format
 
+# Ejecutar pre-commit en todos los archivos
+precommit: install-python-deps
+	. .venv/bin/activate && pre-commit run --all-files
+
+# Instalar el hook de git de pre-commit
+precommit-install: install-python-deps
+	. .venv/bin/activate && pre-commit install
+
 # Limpiar archivos generados
 clean:
 	rm -rf docs
-	rm -rf node_modules 
+	rm -rf node_modules
 	rm -rf .venv
 
 # Instalar dependencias de Python
@@ -68,7 +79,7 @@ install-python-deps:
 
 # Generar PDF del curriculum
 generate-pdf: build install-python-deps
-	. .venv/bin/activate && python3 scripts/generate_pdf.py 
+	. .venv/bin/activate && python3 scripts/generate_pdf.py
 
 # Generar codigo estático en ./docs
 deploy: generate-pdf

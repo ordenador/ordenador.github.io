@@ -45,4 +45,4 @@ EXCLUDED_JOBS = [
 ]
 
 # Configuración de fuentes y estilos
-FONT_IMPORT = '@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");' 
+FONT_IMPORT = '@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");'

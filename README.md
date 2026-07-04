@@ -14,7 +14,6 @@ Welcome to my professional portfolio and CV! This is where you can find my lates
 - [Node.js](package.json)
 - [Python](requirements.txt)
 
-
 ### Essential Commands
 
 ```bash

@@ -13,7 +13,7 @@ def generate_excluded_jobs_css():
 def get_pdf_styles():
     """Retorna los estilos CSS completos para el PDF."""
     excluded_jobs_css = generate_excluded_jobs_css()
-    
+
     return f"""
         {FONT_IMPORT}
 
@@ -186,4 +186,4 @@ def get_pdf_styles():
                 print-color-adjust: exact !important;
             }}
         }}
-    """ 
+    """

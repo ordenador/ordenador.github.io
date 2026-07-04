@@ -1,4 +1,3 @@
-
 const Education = () => {
   return (
     <section className="mb-6 education-section">

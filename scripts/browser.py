@@ -7,7 +7,7 @@ from scripts.styles import get_pdf_styles
 
 class BrowserManager:
     """Clase para manejar la instancia del navegador y la generación del PDF."""
-    
+
     def __init__(self):
         self.pw_instance = None
         self.browser = None
@@ -30,7 +30,7 @@ class BrowserManager:
         )
         self.context = await self.browser.new_context(**BROWSER_CONFIG)
         self.page = await self.context.new_page()
-        
+
         # Configurar listeners para depuración
         self.page.on('console', lambda msg: print(f"PAGE CONSOLE: [{msg.type}] {msg.text}"))
         self.page.on('pageerror', lambda exc: print(f"PAGE ERROR (uncaught exception): {exc}"))
@@ -39,21 +39,21 @@ class BrowserManager:
         """Maneja las solicitudes de recursos durante la carga de la página."""
         url = route.request.url
         print(f"Interceptando request a: {url}")
-        
+
         if url.startswith('file://'):
             try:
                 file_path = url.replace('file://', '')
                 print(f"Intentando cargar archivo local: {file_path}")
-                
+
                 # Si la ruta es relativa, buscar en el directorio dist
                 if file_path.startswith('/assets/'):
                     file_path = str(OUTPUT_DIR / file_path[1:])
-                
+
                 content_type = self._get_content_type(file_path)
-                
+
                 with open(file_path, 'rb') as f:
                     content = f.read()
-                
+
                 await route.fulfill(
                     status=200,
                     content_type=content_type,
@@ -95,10 +95,10 @@ class BrowserManager:
             # Cargar el archivo HTML
             file_url = f"file://{html_file}"
             print(f"Cargando archivo local: {file_url}")
-            
+
             await self.page.goto(file_url, wait_until='networkidle')
             print("Archivo HTML cargado, red mayormente inactiva.")
-            
+
             # Verificar que los estilos se cargaron
             styles = await self.page.evaluate("""() => {
                 const styles = Array.from(document.styleSheets);
@@ -118,7 +118,7 @@ class BrowserManager:
             # Esperar a que el contenido esté listo
             await self.page.wait_for_selector('#resumeContent', state='visible')
             print("El contenedor principal '#resumeContent' está visible.")
-            
+
             # Esperar a que las fuentes estén cargadas
             await self.page.evaluate("document.fonts.ready")
             print("Las fuentes están cargadas.")
@@ -126,7 +126,7 @@ class BrowserManager:
             # Generar PDF
             pdf_file_path = OUTPUT_DIR / 'mario_faundez_cv.pdf'
             print(f"Generando PDF en: {pdf_file_path}...")
-            
+
             await self.page.pdf(
                 path=str(pdf_file_path),
                 **PDF_CONFIG
@@ -145,4 +145,4 @@ class BrowserManager:
         if self.pw_instance:
             print("Deteniendo la instancia de Playwright...")
             await self.pw_instance.stop()
-        print("Script finalizado.") 
+        print("Script finalizado.")

@@ -1,0 +1,23 @@
+exclude: ^(docs/|pnpm-lock\.yaml$|uv\.lock$|public/.*\.pdf$|original\.html$)
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: pnpm run lint
+        language: system
+        files: \.(js|jsx)$
+        pass_filenames: false
+      - id: prettier
+        name: prettier
+        entry: pnpm exec prettier --write --ignore-unknown
+        language: system
+        files: \.(js|jsx|json|md|css)$
