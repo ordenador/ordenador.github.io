@@ -26,17 +26,18 @@ make start
 # Build site + PDFs into dist/
 make build
 
-# Run pre-commit on all files
-make precommit
+# Update all dependencies
+make update
 ```
+
+Code quality checks run automatically on every commit (pre-commit hook, installed by `make install`) and in CI.
 
 ## Testing Locally 🧪
 
 **Full site with PDFs (what production serves):**
 
 ```bash
-make build      # builds dist/ with the site + the PDFs (en/es + legacy alias)
-make preview    # serves dist/ at http://localhost:4173
+make preview    # builds dist/ (site + en/es PDFs) and serves it at http://localhost:4173
 ```
 
 The "Download PDF" button works in both languages here (try the EN|ES switcher or `?lang=es`).
