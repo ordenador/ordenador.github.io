@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from './components/Header.jsx';
 import Education from './components/Education.jsx';
 import Experience from './components/Experience.jsx';
