@@ -14,11 +14,12 @@ from scripts.config import OUTPUT_DIR
 from scripts.browser import BrowserManager
 
 # (query string, ruta de salida relativa a dist/)
-# Variantes personalizadas: taxonomía /cv/<concepto>.pdf, sin nombres de empresa.
+# Variantes personalizadas: taxonomía /cv/<concepto>/mario_faundez_cv.<lang>.pdf,
+# concepto genérico, sin nombres de empresa.
 PDF_JOBS = [
     ('lang=en', 'mario_faundez_cv.en.pdf'),
     ('lang=es', 'mario_faundez_cv.es.pdf'),
-    ('cv=ia-aplicada', 'cv/ia-aplicada.pdf'),
+    ('cv=ia-aplicada', 'cv/ia-aplicada/mario_faundez_cv.es.pdf'),
 ]
 
 async def generate_cv_pdf():
