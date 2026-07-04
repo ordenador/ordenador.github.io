@@ -6,16 +6,17 @@ import { resumeData as es } from '../resume.es';
 const experienceOverrides = {
   0: {
     responsibilities: [
-      'Lidero la AI Developer Platform del Grupo Falabella (equipo, roadmap y arquitectura): una plataforma multi-tenant donde los equipos crean, despliegan y operan aplicaciones y agentes de IA generativa en autoservicio, con acceso gobernado a modelos, permisos granulares, trazabilidad de uso y control de costos.',
+      'Lidero Kairos, la AI Developer Platform (plataforma agéntica) del Grupo Falabella: multi-tenant, donde los equipos crean, despliegan y operan aplicaciones y agentes de IA generativa en autoservicio, con acceso gobernado a modelos, permisos granulares, trazabilidad de uso y control de costos.',
       'Habilito capacidades de IA para los equipos de la compañía, coordinando un equipo multidisciplinario (ingenieros de plataforma IA, arquitectos de agentes, DevSecOps) y recursos internos y externos.',
       'Asesoro iniciativas de IA de distintas áreas en conjunto con arquitectos GenAI: definimos estándares técnicos comunes y ajustamos el roadmap de la plataforma para que se apliquen a través de ella.',
       'Impulso la estandarización de agentes e integraciones vía MCP en la plataforma, definiendo una vía gobernada para su adopción en casos de uso de retail y financieros.',
-      'Promuevo el desarrollo de capacidades de IA en toda la organización mediante la iniciativa InnerSource de Kairos (plataforma agéntica), fomentando una cultura de decisiones basadas en datos e impulsando a la compañía a ser AI-driven.',
+      'Promuevo el desarrollo de capacidades de IA en toda la organización mediante la iniciativa InnerSource de Kairos, fomentando una cultura de decisiones basadas en datos e impulsando a la compañía a ser AI-driven.',
     ],
   },
   1: {
     responsibilities: [
       'Líder de la iniciativa GenOps: diseño de la arquitectura fundacional de una plataforma unificada de IA para Falabella Financiero - simplificando el acceso a diversos modelos y reforzando la seguridad, privacidad y gestión de costos del consumo de datos e IA.',
+      'Expositor en Google Cloud Summit Chile 2025 ("Reimaginando la experiencia del cliente con IA conversacional: el caso de Banco Falabella"): soluciones conversacionales sobre Kairos, escaladas de forma segura en el canal WhatsApp del banco para flujos críticos de atención.',
     ],
   },
   2: {
