@@ -1,7 +1,7 @@
 export const resumeData = {
   personalInfo: {
     name: 'Mario Faúndez',
-    title: 'AI Platform Lead (GenOps Team Lead)',
+    title: 'AI Platform & GenOps Lead',
     contact: {
       phone: '+56 984-255-714',
       email: 'mariofaundezvidal@gmail.com',
@@ -9,7 +9,7 @@ export const resumeData = {
     },
   },
   profile: {
-    text: `Professional with <strong>14+ years</strong> designing and operating scalable platforms. Today I lead the creation of an <strong>AI Developer Platform</strong> that accelerates generative AI adoption at scale, reinforces governance, and improves the developer experience. Building on a solid background in DevOps and <strong>Platform Engineering</strong>, I now lead AI‑focused teams that translate business needs into simple, secure, and reusable technological capabilities.
+    text: `Professional with <strong>15+ years</strong> designing and operating scalable platforms. Today I lead the development and technical direction of the <strong>AI Developer Platform</strong> at Falabella Group, scaling generative AI and <strong>agentic capabilities</strong> across the organization, reinforcing governance, and improving the developer experience. Building on a solid background in DevOps and <strong>Platform Engineering</strong>, I lead AI‑focused teams that translate business needs into simple, secure, and reusable technological capabilities.
 
   My focus is on enabling teams: I align visions, define clear working frameworks, and create spaces for collaboration and continuous learning. I promote open‑source contribution and continuous improvement. I am constantly seeking tools and practices that reduce time‑to‑value, optimize costs, and ensure the <strong>quality and reliability</strong> of AI‑based solutions.`,
   },
@@ -49,10 +49,24 @@ export const resumeData = {
   ],
   experience: [
     {
-      title: 'AI Platform Lead (GenOps Team Lead)',
-      company: 'Falabella Financiero',
-      period: 'May 2024 - Present',
+      title: 'AI Platform Lead (GenOps Lead)',
+      company: 'Grupo Falabella',
+      period: 'Mar 2026 - Present',
       duration: '',
+      location: 'Santiago, Chile',
+      workType: 'Hybrid',
+      responsibilities: [
+        'Leading the development and technical direction of the AI Developer Platform at Falabella Group, focused on scaling Generative AI and agentic capabilities across the organization.',
+        'Driving platform architecture, technical standards, and delivery to help teams build, integrate, and operate secure, governed, scalable, and production-ready AI solutions.',
+        'Improving developer experience, standardizing AI integrations, and accelerating the adoption of Generative AI, assistants, and agent-based solutions across retail and financial use cases.',
+        'Leading the InnerSource initiative for Kairos, creating a collaborative roadmap and building bridges between teams to scale the AI Developer and Agentic Platform across the organization.',
+      ],
+    },
+    {
+      title: 'AI Platform Lead (GenOps Lead)',
+      company: 'Falabella Financiero',
+      period: 'May 2024 - Feb 2026',
+      duration: '1 yr 10 mos',
       location: 'Santiago, Chile',
       workType: 'Hybrid',
       responsibilities: [
@@ -62,8 +76,8 @@ export const resumeData = {
     {
       title: 'DevOps Lead - R&D, Developer Experience Team',
       company: 'Falabella Financiero',
-      period: '11/2023 - 04/2024',
-      duration: '6 mos',
+      period: '11/2023 - 04/2025',
+      duration: '1 yr 6 mos',
       location: 'Santiago, Chile',
       responsibilities: [
         'Leading teams responsible for Developer Experience, Platform Architecture Standards, and the evolution of internal tools platforms.',
@@ -144,7 +158,16 @@ export const resumeData = {
     },
   ],
   skills: {
-    'Change Maker': ['Team Lead', 'Agile', 'DevOps', 'Best Practices', 'Evolution strategy'],
+    'Change Maker': [
+      'Team Lead',
+      'AI Strategy',
+      'Engineering Management',
+      'InnerSource',
+      'Agile',
+      'DevOps',
+      'Best Practices',
+      'Evolution strategy',
+    ],
     IT: [
       'CI/CD',
       'Infrastructure as Code',
