@@ -9,8 +9,8 @@ const experienceOverrides = {
       'Lidero la AI Developer Platform del Grupo Falabella (equipo, roadmap y arquitectura): una plataforma multi-tenant donde los equipos crean, despliegan y operan aplicaciones y agentes de IA generativa en autoservicio, con acceso gobernado a modelos, permisos granulares, trazabilidad de uso y control de costos.',
       'Habilito capacidades de IA para los equipos de la compañía, coordinando un equipo multidisciplinario (ingenieros de plataforma IA, arquitectos de agentes, DevSecOps) y recursos internos y externos.',
       'Asesoro iniciativas de IA de distintas áreas en conjunto con arquitectos GenAI: definimos estándares técnicos comunes y ajustamos el roadmap de la plataforma para que se apliquen a través de ella.',
-      'Lidero la habilitación de agentes e integraciones vía MCP en la plataforma, para casos de uso de retail y financieros, acelerando el time-to-value.',
-      'Promuevo el desarrollo de capacidades de IA en toda la organización mediante la iniciativa InnerSource de Kairos, fomentando una cultura de decisiones basadas en datos e impulsando a la compañía a ser AI-driven.',
+      'Impulso la estandarización de agentes e integraciones vía MCP en la plataforma, definiendo una vía gobernada para su adopción en casos de uso de retail y financieros.',
+      'Promuevo el desarrollo de capacidades de IA en toda la organización mediante la iniciativa InnerSource de Kairos (plataforma agéntica), fomentando una cultura de decisiones basadas en datos e impulsando a la compañía a ser AI-driven.',
     ],
   },
   1: {
