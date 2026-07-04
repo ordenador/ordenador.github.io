@@ -1,12 +1,12 @@
-import { resumeData } from '../data/resume';
+import { useLocale } from '../i18n/LocaleContext';
 
 const SocialLinks = () => {
-  const { socialLinks } = resumeData;
+  const { data, labels } = useLocale();
 
   return (
     <section className="mb-6 findme-section">
-      <h3 className="section-title">Find me Online</h3>
-      {socialLinks.map((link, index) => (
+      <h3 className="section-title">{labels.sections.findMeOnline}</h3>
+      {data.socialLinks.map((link, index) => (
         <div key={index} className="flex items-center mb-2">
           <i className={`fab fa-${link.platform} text-xl mr-2`}></i>
           <a

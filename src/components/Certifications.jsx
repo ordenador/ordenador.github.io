@@ -1,12 +1,12 @@
-import { resumeData } from '../data/resume';
+import { useLocale } from '../i18n/LocaleContext';
 
 const Certifications = () => {
-  const { certifications } = resumeData;
+  const { data, labels } = useLocale();
 
   return (
     <section className="mb-6 certification-section">
-      <h3 className="section-title">Certification</h3>
-      {Object.entries(certifications).map(([platform, certs]) => (
+      <h3 className="section-title">{labels.sections.certifications}</h3>
+      {Object.entries(data.certifications).map(([platform, certs]) => (
         <div key={platform} className={platform === 'Coursera' ? 'mb-3' : ''}>
           <h4 className="font-semibold text-gray-700 text-sm mb-1">{platform}</h4>
           <ul className="certification-list-items">

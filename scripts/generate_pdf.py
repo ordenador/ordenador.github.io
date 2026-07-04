@@ -2,6 +2,7 @@
 Script principal para generar el PDF del CV.
 """
 import asyncio
+import shutil
 import sys
 from pathlib import Path
 
@@ -23,9 +24,13 @@ async def generate_cv_pdf():
     browser_manager = BrowserManager()
     try:
         await browser_manager.setup()
-        await browser_manager.generate_pdf(str(html_file))
+        for lang in ('en', 'es'):
+            await browser_manager.generate_pdf(str(html_file), lang=lang)
     finally:
         await browser_manager.cleanup()
+
+    # Alias legacy: los enlaces antiguos apuntan a mario_faundez_cv.pdf
+    shutil.copyfile(OUTPUT_DIR / 'mario_faundez_cv.en.pdf', OUTPUT_DIR / 'mario_faundez_cv.pdf')
 
 if __name__ == '__main__':
     print("Ejecutando el script de generación de PDF para el CV...")

@@ -1,50 +1,40 @@
+import React from 'react';
+import { useLocale } from '../i18n/LocaleContext';
+
 const Education = () => {
+  const { data, labels } = useLocale();
+
   return (
     <section className="mb-6 education-section">
-      <h3 className="section-title">Education</h3>
-      <div className="mb-4 education-item">
-        <p className="entry-title">Master&apos;s Degree in Artificial Intelligence</p>
-        <p className="institution-name">Pontificia Universidad Católica de Chile</p>
-        <div className="meta-info">
-          <span>
-            <i className="fas fa-calendar-alt"></i>2021 - 2022
-          </span>
-          <span>
-            <i className="fas fa-map-marker-alt"></i>Santiago, Chile
-          </span>
-        </div>
-      </div>
-      <hr className="border-dashed border-gray-300" />
-      <div className="mb-4 education-item">
-        <p className="entry-title">
-          Diploma, Management and Evaluation of Computing Projects and Projects Management
-        </p>
-        <p className="institution-name">Universidad de Chile</p>
-        <div className="meta-info">
-          <span>
-            <i className="fas fa-calendar-alt"></i>06/2013 - 12/2013
-          </span>
-          <span>
-            <i className="fas fa-map-marker-alt"></i>Santiago, Chile
-          </span>
-        </div>
-      </div>
-      <hr className="border-dashed border-gray-300" />
-      <div className="education-item">
-        <p className="entry-title">Civil Computer Engineering</p>
-        <p className="institution-name">Universidad Tecnológica Metropolitana</p>
-        <div className="meta-info">
-          <span>
-            <i className="fas fa-calendar-alt"></i>2005 - 2010
-          </span>
-          <span>
-            <i className="fas fa-map-marker-alt"></i>Santiago, Chile
-          </span>
-        </div>
-        <ul className="description-list">
-          <li>Titled with distinction</li>
-        </ul>
-      </div>
+      <h3 className="section-title">{labels.sections.education}</h3>
+      {data.education.map((edu, index) => (
+        <React.Fragment key={index}>
+          <div
+            className={index < data.education.length - 1 ? 'mb-4 education-item' : 'education-item'}
+          >
+            <p className="entry-title">{edu.degree}</p>
+            <p className="institution-name">{edu.institution}</p>
+            <div className="meta-info">
+              <span>
+                <i className="fas fa-calendar-alt"></i>
+                {edu.period}
+              </span>
+              <span>
+                <i className="fas fa-map-marker-alt"></i>
+                {edu.location}
+              </span>
+            </div>
+            {edu.details && (
+              <ul className="description-list">
+                {edu.details.map((detail, idx) => (
+                  <li key={idx}>{detail}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+          {index < data.education.length - 1 && <hr className="border-dashed border-gray-300" />}
+        </React.Fragment>
+      ))}
     </section>
   );
 };

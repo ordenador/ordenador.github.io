@@ -1,7 +1,8 @@
-import { resumeData } from '../data/resume';
+import { useLocale } from '../i18n/LocaleContext';
 
 const Header = () => {
-  const { personalInfo } = resumeData;
+  const { data } = useLocale();
+  const { personalInfo } = data;
 
   return (
     <header className="text-center mb-6 md:text-left md:flex md:items-center md:justify-between pdf-avoid-break">

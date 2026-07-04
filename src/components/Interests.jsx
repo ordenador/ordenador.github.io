@@ -1,13 +1,13 @@
-import { resumeData } from '../data/resume';
+import { useLocale } from '../i18n/LocaleContext';
 
 const Interests = () => {
-  const { interests } = resumeData;
+  const { data, labels } = useLocale();
 
   return (
     <section className="interests-section">
-      <h3 className="section-title">Interests</h3>
+      <h3 className="section-title">{labels.sections.interests}</h3>
       <div>
-        {interests.map((interest, index) => (
+        {data.interests.map((interest, index) => (
           <span key={index} className="skill-tag">
             {interest}
           </span>
