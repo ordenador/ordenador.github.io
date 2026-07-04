@@ -6,6 +6,7 @@ import { resumeData as en } from './resume.en';
 const experienceEs = [
   {
     period: 'Mar 2026 - Presente',
+    company: 'Grupo Falabella',
     workType: 'Híbrido',
     responsibilities: [
       'Lidero el desarrollo y la dirección técnica de la AI Developer Platform del Grupo Falabella, enfocada en escalar IA generativa y capacidades agénticas en toda la organización.',

@@ -50,7 +50,7 @@ export const resumeData = {
   experience: [
     {
       title: 'AI Platform Lead (GenOps Lead)',
-      company: 'Grupo Falabella',
+      company: 'Falabella Group',
       period: 'Mar 2026 - Present',
       duration: '',
       location: 'Santiago, Chile',
