@@ -40,9 +40,9 @@ const experienceOverrides = {
 export const resumeData = {
   ...es,
   profile: {
-    text: `Profesional con <strong>más de 15 años</strong> liderando plataformas tecnológicas y equipos de alto desempeño. Hoy lidero la <strong>AI Developer Platform</strong> del Grupo Falabella, que habilita la adopción de <strong>inteligencia artificial aplicada</strong> con capacidades autogestionadas por los equipos: <strong>gobierno y seguridad</strong> de datos y modelos, y automatización de procesos con IA generativa y agentes. Combino un Magíster en Inteligencia Artificial con una base sólida en DevOps y <strong>Platform Engineering</strong>, transformando necesidades de negocio en capacidades escalables, medibles y gobernadas.
+    text: `Profesional con <strong>más de 15 años</strong> liderando plataformas tecnológicas y equipos de alto desempeño. Hoy estoy a cargo de Kairos, la <strong>AI Developer Platform</strong> del Grupo Falabella, con la que los equipos adoptan <strong>inteligencia artificial</strong> de forma autogestionada, segura y <strong>gobernada</strong>, automatizando procesos con IA generativa y agentes. Combino un Magíster en Inteligencia Artificial con una base sólida en DevOps y <strong>Platform Engineering</strong> para transformar necesidades de negocio en soluciones escalables y medibles.
 
-  Mi foco está en la captura de valor: eficiencia operacional, control de costos, modelos operativos claros y desarrollo de capacidades organizacionales. Fomento la colaboración entre áreas, la mejora continua y la toma de decisiones basada en datos.`,
+  Mi foco está en la <strong>captura de valor</strong>: eficiencia operacional, control de costos, modelos operativos claros y desarrollo de capacidades organizacionales. Fomento la colaboración entre áreas, la mejora continua y las decisiones basadas en datos.`,
   },
   experience: es.experience.map((exp, i) => ({ ...exp, ...experienceOverrides[i] })),
   skills: {
