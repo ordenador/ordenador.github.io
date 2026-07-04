@@ -1,4 +1,4 @@
-exclude: ^(docs/|pnpm-lock\.yaml$|uv\.lock$|public/.*\.pdf$|original\.html$)
+exclude: ^(docs/|dist/|pnpm-lock\.yaml$|uv\.lock$|public/.*\.pdf$|original\.html$)
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0

@@ -46,7 +46,7 @@ start:
 
 # Generar los archivos estáticos para producción
 build:
-	rm -rf docs
+	rm -rf dist
 	pnpm run build
 	uv sync
 	. .venv/bin/activate && python3 scripts/generate_pdf.py
@@ -69,7 +69,7 @@ precommit-install: install-python-deps
 
 # Limpiar archivos generados
 clean:
-	rm -rf docs
+	rm -rf dist
 	rm -rf node_modules
 	rm -rf .venv
 
@@ -81,5 +81,5 @@ install-python-deps:
 generate-pdf: build install-python-deps
 	. .venv/bin/activate && python3 scripts/generate_pdf.py
 
-# Generar codigo estático en ./docs
+# Deploy real = push a main (CI construye y publica)
 deploy: generate-pdf
