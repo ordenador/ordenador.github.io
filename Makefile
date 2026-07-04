@@ -21,7 +21,7 @@ help:
 
 # Instalar todas las dependencias
 install:
-	npm install
+	pnpm install
 	uv sync
 	. .venv/bin/activate && playwright install chromium
 
@@ -31,30 +31,30 @@ update-packages-python:
 
 # Actualizar package.json a las últimas versiones
 update-packages-node:
-	npx npm-check-updates -u
-	npm install
+	pnpm dlx npm-check-updates -u
+	pnpm install
 
 # Actualizar dependencias
 update-packages: update-packages-node update-packages-python
 
 # Iniciar el servidor de desarrollo
 start:
-	npm run start
+	pnpm run start
 
 # Generar los archivos estáticos para producción
 build:
 	rm -rf docs
-	npm run build
+	pnpm run build
 	uv sync
 	. .venv/bin/activate && python3 scripts/generate_pdf.py
 
 # Previsualizar la versión de producción
 preview:
-	npm run preview
+	pnpm run preview
 
 # Ejecutar linter y formateador automáticamente
 lint:
-	npm run lint:fix && npm run format
+	pnpm run lint:fix && pnpm run format
 
 # Limpiar archivos generados
 clean:
