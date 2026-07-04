@@ -1,12 +1,17 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { resumeData as en } from '../data/resume.en';
 import { resumeData as es } from '../data/resume.es';
+import { variants } from '../data/variants';
 import { labels } from './labels';
 
 const locales = { en, es };
 const LocaleContext = createContext(null);
 
+// Variante de CV personalizada (?cv=<slug>), no listada en el sitio.
+const activeVariant = variants[new URLSearchParams(window.location.search).get('cv')];
+
 function initialLocale() {
+  if (activeVariant) return activeVariant.locale;
   const param = new URLSearchParams(window.location.search).get('lang');
   if (param === 'en' || param === 'es') return param;
   const stored = localStorage.getItem('lang');
@@ -34,7 +39,12 @@ export function LocaleProvider({ children }) {
 
   return (
     <LocaleContext.Provider
-      value={{ locale, setLocale, data: locales[locale], labels: labels[locale] }}
+      value={{
+        locale,
+        setLocale,
+        data: activeVariant ? activeVariant.data : locales[locale],
+        labels: labels[locale],
+      }}
     >
       {children}
     </LocaleContext.Provider>

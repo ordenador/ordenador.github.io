@@ -35,11 +35,11 @@ class BrowserManager:
         self.page.on('console', lambda msg: print(f"PAGE CONSOLE: [{msg.type}] {msg.text}"))
         self.page.on('pageerror', lambda exc: print(f"PAGE ERROR (uncaught exception): {exc}"))
 
-    async def generate_pdf(self, html_file: str, lang: str = 'en'):
-        """Genera el PDF a partir del archivo HTML para un idioma."""
+    async def generate_pdf(self, html_file: str, query: str, output: str):
+        """Genera un PDF a partir del archivo HTML para un query (?lang=xx o ?cv=slug)."""
         try:
             # Cargar el archivo HTML (todos los assets son locales)
-            file_url = f"file://{html_file}?lang={lang}"
+            file_url = f"file://{html_file}?{query}"
             print(f"Cargando archivo local: {file_url}")
 
             await self.page.goto(file_url, wait_until='networkidle')
@@ -70,7 +70,8 @@ class BrowserManager:
             print("Las fuentes están cargadas.")
 
             # Generar PDF
-            pdf_file_path = OUTPUT_DIR / f'mario_faundez_cv.{lang}.pdf'
+            pdf_file_path = OUTPUT_DIR / output
+            pdf_file_path.parent.mkdir(parents=True, exist_ok=True)
             print(f"Generando PDF en: {pdf_file_path}...")
 
             await self.page.pdf(
