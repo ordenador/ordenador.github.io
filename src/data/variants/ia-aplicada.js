@@ -6,7 +6,8 @@ import { resumeData as es } from '../resume.es';
 const experienceOverrides = {
   0: {
     responsibilities: [
-      'Lidero la plataforma interna de IA del Grupo Falabella (Internal Developer Platform) — equipo, roadmap y arquitectura — que entrega capacidades de IA generativa y agentes autogestionadas por los equipos de desarrollo.',
+      'Lidero la plataforma interna de IA del Grupo Falabella (Internal Developer Platform) — equipo, roadmap y arquitectura — que entrega capacidades de IA generativa y agentes autogestionadas por los equipos de desarrollo, con gobernanza, observabilidad y control de acceso y consumo integrados.',
+      'Diseño y desarrollo el equipo de la plataforma: defino los perfiles, lidero la selección de roles especializados (ingeniería de plataforma IA, arquitectura de agentes, DevSecOps) y gestiono capacidades internas y externas según la demanda.',
       'Apoyo y asesoro iniciativas de IA de distintas áreas en conjunto con arquitectos GenAI, promoviendo estándares técnicos y buenas prácticas para soluciones seguras, gobernadas y escalables.',
       'Lidero la habilitación de agentes e integraciones (incluyendo MCP) y técnicas de uso de contexto (RAG) para casos de uso de retail y financieros, acelerando el time-to-value.',
       'Promuevo el desarrollo de capacidades de IA en toda la organización mediante la iniciativa InnerSource de Kairos, fomentando una cultura de decisiones basadas en datos e impulsando a la compañía a ser AI-driven.',
@@ -38,7 +39,7 @@ const experienceOverrides = {
 export const resumeData = {
   ...es,
   profile: {
-    text: `Profesional con <strong>más de 15 años</strong> liderando plataformas tecnológicas y equipos de alto desempeño. Hoy dirijo la estrategia y adopción de <strong>inteligencia artificial aplicada</strong> en el Grupo Falabella: plataformas de datos e IA con autoservicio para los equipos, <strong>gobierno y seguridad</strong> de datos y modelos, y automatización de procesos con IA generativa y agentes. Combino un Magíster en Inteligencia Artificial con una base sólida en DevOps y <strong>Platform Engineering</strong>, transformando necesidades de negocio en capacidades escalables, medibles y gobernadas.
+    text: `Profesional con <strong>más de 15 años</strong> liderando plataformas tecnológicas y equipos de alto desempeño. Hoy lidero la plataforma interna de IA del Grupo Falabella, que habilita la adopción de <strong>inteligencia artificial aplicada</strong> con capacidades autogestionadas por los equipos: <strong>gobierno y seguridad</strong> de datos y modelos, y automatización de procesos con IA generativa y agentes. Combino un Magíster en Inteligencia Artificial con una base sólida en DevOps y <strong>Platform Engineering</strong>, transformando necesidades de negocio en capacidades escalables, medibles y gobernadas.
 
   Mi foco está en la captura de valor: eficiencia operacional, control de costos, modelos operativos claros y desarrollo de capacidades organizacionales. Fomento la colaboración entre áreas, la mejora continua y la toma de decisiones basada en datos.`,
   },
