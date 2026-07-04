@@ -35,64 +35,10 @@ class BrowserManager:
         self.page.on('console', lambda msg: print(f"PAGE CONSOLE: [{msg.type}] {msg.text}"))
         self.page.on('pageerror', lambda exc: print(f"PAGE ERROR (uncaught exception): {exc}"))
 
-    async def handle_route(self, route):
-        """Maneja las solicitudes de recursos durante la carga de la página."""
-        url = route.request.url
-        print(f"Interceptando request a: {url}")
-
-        if url.startswith('file://'):
-            try:
-                file_path = url.replace('file://', '')
-                print(f"Intentando cargar archivo local: {file_path}")
-
-                # Si la ruta es relativa, buscar en el directorio dist
-                if file_path.startswith('/assets/'):
-                    file_path = str(OUTPUT_DIR / file_path[1:])
-
-                content_type = self._get_content_type(file_path)
-
-                with open(file_path, 'rb') as f:
-                    content = f.read()
-
-                await route.fulfill(
-                    status=200,
-                    content_type=content_type,
-                    body=content
-                )
-                print(f"Archivo cargado exitosamente: {file_path}")
-            except Exception as e:
-                print(f"Error al cargar archivo local {url}: {str(e)}")
-                await route.continue_()
-        elif any(ext in url for ext in ['cdnjs.cloudflare.com', 'fonts.googleapis.com', 'fonts.gstatic.com']):
-            await route.continue_()
-        else:
-            print(f"Bloqueando request a: {url}")
-            await route.abort()
-
-    def _get_content_type(self, file_path: str) -> str:
-        """Determina el tipo de contenido basado en la extensión del archivo."""
-        if file_path.endswith('.css'):
-            return 'text/css'
-        elif file_path.endswith('.js'):
-            return 'application/javascript'
-        elif file_path.endswith('.json'):
-            return 'application/json'
-        elif file_path.endswith('.png'):
-            return 'image/png'
-        elif file_path.endswith('.jpg') or file_path.endswith('.jpeg'):
-            return 'image/jpeg'
-        elif file_path.endswith('.svg'):
-            return 'image/svg+xml'
-        return 'text/html'
-
     async def generate_pdf(self, html_file: str):
         """Genera el PDF a partir del archivo HTML."""
         try:
-            # Configurar el interceptor de requests
-            await self.page.route("**/*", self.handle_route)
-            print("Interceptor de requests configurado.")
-
-            # Cargar el archivo HTML
+            # Cargar el archivo HTML (todos los assets son locales)
             file_url = f"file://{html_file}"
             print(f"Cargando archivo local: {file_url}")
 

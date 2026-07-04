@@ -35,14 +35,3 @@ BROWSER_CONFIG = {
     'forced_colors': 'none',
     'reduced_motion': 'no-preference'
 }
-
-# Configuración de trabajos a excluir en el PDF
-EXCLUDED_JOBS = [
-    {
-        "company": "ARS Servicios Profesionales",
-        "title": "Support Engineer"
-    }
-]
-
-# Configuración de fuentes y estilos
-FONT_IMPORT = '@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");'
