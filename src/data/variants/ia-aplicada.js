@@ -6,7 +6,7 @@ import { resumeData as es } from '../resume.es';
 const experienceOverrides = {
   0: {
     responsibilities: [
-      'Lidero el desarrollo y la dirección técnica de la plataforma interna de IA del Grupo Falabella (Internal Developer Platform), que entrega capacidades de IA generativa y agentes autogestionadas por los equipos de desarrollo.',
+      'Lidero la plataforma interna de IA del Grupo Falabella (Internal Developer Platform) — equipo, roadmap y arquitectura — que entrega capacidades de IA generativa y agentes autogestionadas por los equipos de desarrollo.',
       'Apoyo y asesoro iniciativas de IA de distintas áreas en conjunto con arquitectos GenAI, promoviendo estándares técnicos y buenas prácticas para soluciones seguras, gobernadas y escalables.',
       'Lidero la habilitación de agentes e integraciones (incluyendo MCP) y técnicas de uso de contexto (RAG) para casos de uso de retail y financieros, acelerando el time-to-value.',
       'Promuevo el desarrollo de capacidades de IA en toda la organización mediante la iniciativa InnerSource de Kairos, fomentando una cultura de decisiones basadas en datos e impulsando a la compañía a ser AI-driven.',
