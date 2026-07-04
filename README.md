@@ -30,6 +30,25 @@ make build
 make precommit
 ```
 
+## Testing Locally 🧪
+
+**Full site with PDFs (what production serves):**
+
+```bash
+make build      # builds dist/ with the site + the PDFs (en/es + legacy alias)
+make preview    # serves dist/ at http://localhost:4173
+```
+
+The "Download PDF" button works in both languages here (try the EN|ES switcher or `?lang=es`).
+
+**Development only (hot reload, no PDFs):**
+
+```bash
+make start      # vite dev server at http://localhost:3000
+```
+
+The download button 404s in dev — PDFs are generated at build time, not by the dev server. To inspect a generated PDF directly: `make build && open dist/mario_faundez_cv.es.pdf`.
+
 ## Deploy 🚢
 
 Push to `main`. GitHub Actions builds the site, generates the PDFs, and deploys to GitHub Pages — no build artifacts are committed.
