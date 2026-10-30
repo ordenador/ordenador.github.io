@@ -71,7 +71,7 @@ status for unknown pages and assets instead of Vite's default SPA fallback.
 
 Font Awesome and the old Inter/Poppins imports were replaced with a single
 licensed variable font and small inline SVGs. Web body copy is 16px. Paper uses a separate compact two-column composition,
-9pt Arial-compatible Sans body text, navy headings and dark orange institutions,
+9.5pt Arial-compatible Sans career text, navy headings and dark orange institutions,
 matching the actual older PDF. No additional print fonts are downloaded. The
 approved screen CSS, content and layout remain unchanged. Review every paper
 page separately; the responsive website does not represent the PDF composition.
@@ -96,18 +96,23 @@ Public filenames are preserved:
 - `/cv/ia-aplicada/mario_faundez_cv.es.pdf`
 
 A complete CV currently spans **two A4 pages** in each language, with all nine
-roles. The first page retains the classic education/current-role left column and
-profile/capabilities right column. The second page continues the career across
-both columns, followed by certifications. Do not cap export pages or remove facts
+roles. Both pages share 16mm margins and equal-width column axes. The first page
+places education/current role on the left and profile/capabilities, the preceding
+role and interests on the right. The second page continues the seven older roles
+across both columns, with certifications and languages. Whole blocks are measured
+at paper width to fill the first page and balance the continuation. Do not cap export pages or remove facts
 to meet a count: the two-page acceptance regression means a content/layout change
 needs review if pagination grows.
 
 `src/print-layout.js` reversibly groups the existing DOM nodes for printing;
-`public/print.css` is selected only for print media. Before/after-print and print
-media events preserve exact screen DOM and disclosure state, including cancellation.
+`public/print.css` loads from a static `media="print"` link. Native `beforeprint`
+fires before Chromium activates print media, so the hook temporarily activates
+that stylesheet for paper measurements; `afterprint` restores its print-only media.
+Print events preserve exact screen DOM and disclosure state, including cancellation.
 There is no duplicated CV data/template. Without JavaScript, browser printing uses
 the existing complete linear fallback; loading print CSS without grouping never
-hides the career. The download PDFs and normal browser print use the two-column
+hides the career. The full-profile contact link is hidden in all print flows; it
+remains available on screen. The download PDFs and normal browser print use the two-column
 layout. Tagged text, every source responsibility, within-career reading order and
 links are checked; this does not guarantee universal ATS compatibility.
 

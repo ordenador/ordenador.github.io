@@ -12,10 +12,10 @@ PDF_CONFIG = {
     'format': 'A4',
     'print_background': True,
     'margin': {
-        'top': '10mm',
-        'right': '12mm',
-        'bottom': '12mm',
-        'left': '12mm'
+        'top': '16mm',
+        'right': '16mm',
+        'bottom': '16mm',
+        'left': '16mm'
     },
     'scale': 1,
     'prefer_css_page_size': True,

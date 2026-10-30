@@ -17,6 +17,11 @@ from pypdf import PdfReader
 
 ORIGIN = 'https://ordenador.cl'
 LOCALES = {'es': '/', 'en': '/en/'}
+SOURCE_CONTENT = ('.experience-item h3, .experience-item .institution-name, .experience-item .entry-summary, '
+                  '.experience-item .description-list li, .education-item h3, .education-item p, '
+                  '.profile-section > div, .skill-group h3, .skill-group p, .certification-group h3, '
+                  '.certification-group li, .languages-section dt, .languages-section dd, .interests-section p')
+APPROVED_SCREEN_CSS = '1eb69ebfc6e4ad1efb390fae819ffbf6c6c3e7254f2367ac7e9e1988a342621e'
 PDF_PATHS = [
     '/mario_faundez_cv.es.pdf', '/mario_faundez_cv.en.pdf',
     '/mario_faundez_cv.pdf', '/cv/ia-aplicada/mario_faundez_cv.es.pdf',
@@ -50,7 +55,8 @@ def pdf_checks(content, path, responsibilities=None, require_compact=True):
     links = [a.get_object().get('/A', {}).get('/URI', '') for page in reader.pages for a in page.get('/Annots', [])]
     check(any(link.startswith('mailto:') for link in links), f'{path}: no email link')
     check(any('linkedin.com' in link for link in links), f'{path}: no LinkedIn link')
-    check(any('mfaundez.com' in link for link in links), f'{path}: no profile link')
+    check(not any('mfaundez.com' in link for link in links), f'{path}: unwanted full-profile annotation')
+    check('Ver perfil completo' not in text and 'View full profile' not in text, f'{path}: unwanted full-profile text')
     expected = 'Capacidades' if '.es.pdf' in path else 'Capabilities'
     check(expected.casefold() in text.casefold(), f'{path}: wrong language')
     print(f'PASS PDF {path}: {len(reader.pages)} pages, full career, reading order, links, tags')
@@ -95,7 +101,7 @@ async def verify_screen_and_print(browser, base, args):
                 await native.evaluate('document.fonts.ready')
                 dom = await native.locator('#resumeContent').inner_html()
                 pixels = await native.screenshot(full_page=True)
-                responsibilities = await native.locator('.experience-item .entry-summary, .experience-item .description-list li').all_text_contents()
+                responsibilities = await native.locator(SOURCE_CONTENT).all_text_contents()
                 for iteration in range(3):
                     printed = await native.pdf(format='A4',print_background=True,tagged=True,prefer_css_page_size=True)
                     await native.wait_for_function("!document.querySelector('.print-continuation')")
@@ -224,7 +230,15 @@ async def run(args):
             await page.wait_for_selector('.print-continuation')
             check(await page.locator('.experience-item').last.is_visible(), 'All history visible when printing')
             check(await page.locator('.print-columns').count() == 2, 'Classic first page plus two-column continuation')
-            check(await page.locator('.print-continuation .experience-item').count() == 8, 'Eight older roles retained in continuation')
+            check(await page.locator('main > .print-columns .experience-item').count() == 2, 'Two recent roles fill the first page')
+            check(await page.locator('.print-continuation .experience-item').count() == 7, 'Seven older roles retained in continuation')
+            check(not await page.locator('.profile-link').is_visible(), 'Full-profile link hidden only in print')
+            geometry = await page.evaluate('''() => [...document.querySelectorAll('.print-columns')].map(grid =>
+                [...grid.children].map(column => { const r = column.getBoundingClientRect();
+                    return {x:r.x, width:r.width, height:r.height}; }))''')
+            for first, second in zip(*geometry):
+                check(abs(first['x'] - second['x']) < 0.1 and abs(first['width'] - second['width']) < 0.1, 'Same paper column axes on both pages')
+            check(abs(geometry[0][0]['width'] - geometry[0][1]['width']) < 0.1, 'Equal-width paper columns')
             await page.emulate_media(media='screen')
             await page.wait_for_function("!document.querySelector('.print-continuation')")
             check(await page.locator('#resumeContent').inner_html() == before_print, 'Exact DOM restored after print')
@@ -243,21 +257,17 @@ async def run(args):
             check(await plain.locator('.experience-item').last.is_visible(), 'History usable without JS')
             await plain.locator(f'.language-switcher a[lang="{other}"]').click()
             check(await plain.locator('html').get_attribute('lang') == other, 'Language navigation without JS')
-            # Print-only CSS must retain all content even without the JS grouping
-            # hook, including if the stylesheet is loaded independently.
-            async def with_print_styles(route):
-                if route.request.is_navigation_request() and route.request.resource_type == 'document':
-                    response = await route.fetch()
-                    html = (await response.text()).replace('</head>', '<link rel="stylesheet" href="/print.css" media="print"></head>')
-                    await route.fulfill(response=response, body=html)
-                else:
-                    await route.continue_()
-            await nojs.route('**/*', with_print_styles)
-            await plain.reload(wait_until='networkidle')
+            # Exercise the real static stylesheet with application JS disabled;
+            # no routed HTML, injected CSS or application grouping is supplied.
+            check(await plain.locator('link[href="/print.css"][media="print"]').count() == 1, 'Static paper stylesheet available without JS')
+            await plain.wait_for_function("document.querySelector('link[href=\"/print.css\"]')?.sheet")
             await plain.emulate_media(media='print')
             check(await plain.locator('.experience-item').last.is_visible(), 'No-JS print keeps old roles visible')
             nojs_pdf = await plain.pdf(format='A4', print_background=True, tagged=True)
             nojs_text = '\n'.join(sheet.extract_text() for sheet in PdfReader(BytesIO(nojs_pdf)).pages)
+            check('Ver perfil completo' not in nojs_text and 'View full profile' not in nojs_text, 'No-JS print hides full-profile text')
+            nojs_links = [a.get_object().get('/A', {}).get('/URI', '') for sheet in PdfReader(BytesIO(nojs_pdf)).pages for a in sheet.get('/Annots', [])]
+            check(not any('mfaundez.com' in link for link in nojs_links), 'No-JS print removes full-profile annotation')
             check('Adessa Falabella' in nojs_text and 'LATAM Airlines' in nojs_text, 'No-JS printed PDF retains older experience')
             await nojs.close()
             print(f'PASS no-JS {locale}: complete HTML + history + language link')
@@ -292,7 +302,7 @@ async def run(args):
             pdf_contents[path] = await response.body()
             source_path = '/?cv=ia-aplicada' if path.startswith('/cv/') else ('/' if '.es.pdf' in path else '/en/')
             await page.goto(base+source_path,wait_until='networkidle')
-            source_responsibilities = await page.locator('.experience-item .entry-summary, .experience-item .description-list li').all_text_contents()
+            source_responsibilities = await page.locator(SOURCE_CONTENT).all_text_contents()
             pdf_checks(pdf_contents[path],path,source_responsibilities)
         check(pdf_contents['/mario_faundez_cv.pdf'] == pdf_contents['/mario_faundez_cv.en.pdf'], 'Legacy alias equals English PDF')
         check(pdf_contents['/mario_faundez_cv.es.pdf'] != pdf_contents['/mario_faundez_cv.en.pdf'], 'Distinct language PDFs')
@@ -308,6 +318,9 @@ async def run(args):
         for path in ['/favicon.svg','/favicon.ico','/apple-touch-icon.png','/social-card.png','/fonts/schibsted-grotesk-latin.woff2']:
             check((await request.get(base+path)).status == 200, f'Asset unavailable: {path}')
         check(not analytics_requests, f'Automated browser sent analytics: {analytics_requests}')
+        screen_css = await page.locator('link[rel="stylesheet"]:not([media="print"])').first.get_attribute('href')
+        screen_response = await request.get(base+screen_css)
+        check(hashlib.sha256(await screen_response.body()).hexdigest() == APPROVED_SCREEN_CSS, 'Approved screen CSS unchanged')
         await verify_screen_and_print(browser, base, args)
         await context.close()
         await browser.close()
