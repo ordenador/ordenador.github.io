@@ -9,9 +9,7 @@ export const resumeData = {
     },
   },
   profile: {
-    text: `Professional with <strong>15+ years</strong> leading technology platforms and high-performing teams. Today I am in charge of Kairos, Falabella Group's <strong>AI Developer Platform</strong>, through which teams adopt <strong>artificial intelligence</strong> in a self-service, secure, and <strong>governed</strong> way, automating processes with generative AI and agents. I combine a Master's in Artificial Intelligence with a solid background in DevOps and <strong>Platform Engineering</strong> to turn business needs into scalable, measurable solutions.
-
-  My focus is on <strong>value capture</strong>: operational efficiency, cost control, clear operating models, and the development of organizational capabilities. I foster cross-team collaboration, continuous improvement, and data-driven decisions.`,
+    text: `I lead Kairos, Falabella Group's AI platform, with a multidisciplinary team. I have more than 15 years of experience in systems, DevOps and platforms. My focus is on helping teams build and operate AI applications and agents with autonomy, security and cost control.`,
   },
 
   socialLinks: [
@@ -34,7 +32,7 @@ export const resumeData = {
       location: 'Santiago, Chile',
     },
     {
-      degree: 'Diploma, Management and Evaluation of Computing Projects and Projects Management',
+      degree: 'Diploma in IT Project Management and Evaluation',
       institution: 'Universidad de Chile',
       period: '06/2013 - 12/2013',
       location: 'Santiago, Chile',
@@ -108,9 +106,9 @@ export const resumeData = {
       duration: '1 yr 4 mos',
       location: 'Santiago, Chile',
       responsibilities: [
-        'Leading team that improves and proposes new technologies so the components implementing DevOps accomplished the latest industry standards.',
+        'Led the team evaluating new technologies and maintaining DevOps components in line with industry standards.',
         'Implemented advanced monitoring and alerts using Prometheus, enhancing system reliability.',
-        'Encourage the use of Kubernetes.',
+        'Promoted the adoption of Kubernetes.',
       ],
     },
     {
@@ -141,10 +139,10 @@ export const resumeData = {
       duration: '1 yr 5 mos',
       location: 'Santiago, Chile',
       responsibilities: [
-        'Support to developer teams in: infrastructure, CI/CD, all transversal tools.',
-        'Manage Servers, delivery multiples environments to developers.',
-        'Automation of manual procedures, for example: database maintaining, CMS maintaining.',
-        'Administration of database MySQL in HA.',
+        'Supported development teams with infrastructure, CI/CD and shared tooling.',
+        'Managed servers and delivered development environments.',
+        'Automated manual procedures, including database and CMS maintenance.',
+        'Administered highly available MySQL databases.',
       ],
     },
     {

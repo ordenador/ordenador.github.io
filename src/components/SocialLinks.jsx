@@ -1,26 +1,22 @@
 import { useLocale } from '../i18n/LocaleContext';
-
-const SocialLinks = () => {
+import Icon from './Icon';
+export default function SocialLinks() {
   const { data, labels } = useLocale();
-
   return (
-    <section className="mb-6 findme-section">
-      <h3 className="section-title">{labels.sections.findMeOnline}</h3>
-      {data.socialLinks.map((link, index) => (
-        <div key={index} className="flex items-center mb-2">
-          <i className={`fab fa-${link.platform} text-xl mr-2`}></i>
-          <a
-            href={link.url}
-            target="_blank"
-            className="find-me-online-link text-xs"
-            rel="noreferrer"
-          >
-            {link.display}
-          </a>
-        </div>
-      ))}
+    <section className="findme-section" aria-labelledby="links-title">
+      <h2 id="links-title" className="section-title">
+        {labels.sections.findMeOnline}
+      </h2>
+      <ul>
+        {data.socialLinks.map((link) => (
+          <li key={link.platform}>
+            <a href={link.url} target="_blank" rel="noopener noreferrer">
+              {link.platform === 'linkedin' ? 'LinkedIn' : 'GitHub'}
+              <Icon name="external" />
+            </a>
+          </li>
+        ))}
+      </ul>
     </section>
   );
-};
-
-export default SocialLinks;
+}

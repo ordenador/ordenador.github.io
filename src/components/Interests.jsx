@@ -1,20 +1,12 @@
 import { useLocale } from '../i18n/LocaleContext';
-
-const Interests = () => {
+export default function Interests() {
   const { data, labels } = useLocale();
-
   return (
-    <section className="interests-section">
-      <h3 className="section-title">{labels.sections.interests}</h3>
-      <div>
-        {data.interests.map((interest, index) => (
-          <span key={index} className="skill-tag">
-            {interest}
-          </span>
-        ))}
-      </div>
+    <section className="interests-section" aria-labelledby="interests-title">
+      <h2 id="interests-title" className="section-title">
+        {labels.sections.interests}
+      </h2>
+      <p>{data.interests.join(' · ')}</p>
     </section>
   );
-};
-
-export default Interests;
+}

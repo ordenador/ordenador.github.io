@@ -1,66 +1,83 @@
-import Header from './components/Header.jsx';
-import Education from './components/Education.jsx';
-import Experience from './components/Experience.jsx';
-import Profile from './components/Profile.jsx';
-import SocialLinks from './components/SocialLinks.jsx';
-import Skills from './components/Skills.jsx';
-import Languages from './components/Languages.jsx';
-import Certifications from './components/Certifications.jsx';
-import Interests from './components/Interests.jsx';
+import Header from './components/Header';
+import Profile from './components/Profile';
+import Experience from './components/Experience';
+import Skills from './components/Skills';
+import Education from './components/Education';
+import Languages from './components/Languages';
+import Certifications from './components/Certifications';
+import Interests from './components/Interests';
+import SocialLinks from './components/SocialLinks';
+import Icon from './components/Icon';
 import { useLocale } from './i18n/LocaleContext';
+import { trackContact } from './analytics';
 
-function App() {
-  const { locale, setLocale, labels } = useLocale();
-
+export default function App() {
+  const { locale, labels, languageHref, data } = useLocale();
   return (
-    <div className="bg-gray-100 p-4 md:p-8">
-      <div
-        id="downloadPdfBtnContainer"
-        className="max-w-5xl mx-auto mb-6 flex items-center justify-center gap-4 md:justify-end"
-      >
-        <div className="text-sm text-gray-600">
-          {['en', 'es'].map((lang, i) => (
-            <span key={lang}>
-              {i > 0 && <span className="mx-1">|</span>}
-              <button
-                onClick={() => setLocale(lang)}
-                className={locale === lang ? 'font-bold custom-blue underline' : 'hover:underline'}
+    <>
+      <a className="skip-link" href="#resumeContent">
+        {labels.skip}
+      </a>
+      <div className="site-toolbar" id="downloadPdfBtnContainer">
+        <a
+          className="site-home"
+          href={locale === 'en' ? 'https://mfaundez.com/en/' : 'https://mfaundez.com/'}
+        >
+          mfaundez.com
+          <Icon name="external" />
+        </a>
+        <div className="toolbar-actions">
+          <nav aria-label={labels.language} className="language-switcher">
+            {['es', 'en'].map((lang) => (
+              <a
+                key={lang}
+                href={languageHref(lang)}
+                lang={lang}
+                hrefLang={lang}
+                aria-label={lang === 'es' ? 'Español' : 'English'}
+                aria-current={locale === lang ? 'page' : undefined}
               >
                 {lang.toUpperCase()}
-              </button>
-            </span>
-          ))}
+              </a>
+            ))}
+          </nav>
+          <a className="download-pdf-btn" href={labels.pdfHref}>
+            <Icon name="download" />
+            {labels.downloadPdf}
+            <span className="file-format">PDF</span>
+          </a>
         </div>
-        <a href={labels.pdfHref} className="download-pdf-btn">
-          <i className="fas fa-file-pdf mr-2"></i>
-          {labels.downloadPdf}
-        </a>
       </div>
-
-      <div
+      <main
         id="resumeContent"
-        className="max-w-5xl mx-auto bg-white shadow-xl rounded-lg p-6 md:p-10"
+        className="resume"
+        tabIndex="-1"
+        data-experience-count={data.experience.length}
       >
+        <p className="document-type">{labels.resume}</p>
         <Header />
-
+        <Profile />
         <div className="main-content-grid">
-          <div className="left-column">
-            <Education />
-            <Experience />
-          </div>
-
-          <div className="right-column profile-column">
-            <Profile />
-            <SocialLinks />
+          <Experience />
+          <aside
+            aria-label={locale === 'es' ? 'Formación y capacidades' : 'Education and capabilities'}
+          >
             <Skills />
+            <Education />
             <Languages />
             <Certifications />
             <Interests />
-          </div>
+            <SocialLinks />
+          </aside>
         </div>
-      </div>
-    </div>
+      </main>
+      <footer className="site-footer">
+        <p>Mario Faúndez · {labels.footer}</p>
+        <a href={`mailto:${data.personalInfo.contact.email}`} onClick={() => trackContact(locale)}>
+          {labels.contact}
+          <Icon name="arrow" />
+        </a>
+      </footer>
+    </>
   );
 }
-
-export default App;

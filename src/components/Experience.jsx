@@ -1,43 +1,51 @@
-import React from 'react';
 import { useLocale } from '../i18n/LocaleContext';
 
-const Experience = () => {
-  const { data, labels } = useLocale();
-
+function Entry({ exp }) {
   return (
-    <section className="mb-6 experience-section">
-      <h3 className="section-title">{labels.sections.experience}</h3>
-      {data.experience.map((exp, index) => (
-        <React.Fragment key={index}>
-          <div className="mb-4 experience-item">
-            <div className="flex justify-between items-start">
-              <div>
-                <p className="entry-title">{exp.title}</p>
-                <p className="institution-name">{exp.company}</p>
-              </div>
-            </div>
-            <p className="meta-info">
-              <i className="fas fa-calendar-alt mr-2"></i>
-              {exp.period}
-              {exp.duration && ` · ${exp.duration}`}
-              <span className="mx-2">|</span>
-              <i className="fas fa-map-marker-alt mr-2"></i>
-              {exp.location}
-              {exp.workType && ` · ${exp.workType}`}
-            </p>
-            <ul className="description-list">
-              {exp.responsibilities.map((resp, idx) => (
-                <li key={idx} className={idx === 0 ? 'mb-2' : 'ml-4 text-gray-700'}>
-                  {idx === 0 ? resp : `• ${resp}`}
-                </li>
-              ))}
-            </ul>
-          </div>
-          {index < data.experience.length - 1 && <hr className="border-dashed border-gray-300" />}
-        </React.Fragment>
+    <article className="experience-item">
+      <div className="entry-heading">
+        <div>
+          <h3>{exp.title}</h3>
+          <p className="institution-name">{exp.company}</p>
+        </div>
+        <p className="entry-period">{exp.period}</p>
+      </div>
+      <p className="meta-info">
+        {[exp.duration, exp.location, exp.workType].filter(Boolean).join(' · ')}
+      </p>
+      <p className="entry-summary">{exp.responsibilities[0]}</p>
+      {exp.responsibilities.length > 1 && (
+        <ul className="description-list">
+          {exp.responsibilities.slice(1).map((resp, idx) => (
+            <li key={idx}>{resp}</li>
+          ))}
+        </ul>
+      )}
+    </article>
+  );
+}
+
+export default function Experience() {
+  const { data, labels } = useLocale();
+  return (
+    <section id="experience" className="experience-section" aria-labelledby="experience-title">
+      <h2 id="experience-title" className="section-title">
+        {labels.sections.experience}
+      </h2>
+      {data.experience.slice(0, 3).map((exp, index) => (
+        <Entry key={index} exp={exp} />
       ))}
+      <details className="career-history">
+        <summary>
+          {labels.history}
+          <span>{labels.historyNote}</span>
+        </summary>
+        <div className="earlier-experience">
+          {data.experience.slice(3).map((exp, index) => (
+            <Entry key={index} exp={exp} />
+          ))}
+        </div>
+      </details>
     </section>
   );
-};
-
-export default Experience;
+}

@@ -85,9 +85,7 @@ const experienceEs = [
 export const resumeData = {
   ...en,
   profile: {
-    text: `Profesional con <strong>más de 15 años</strong> liderando plataformas tecnológicas y equipos de alto desempeño. Hoy estoy a cargo de Kairos, la <strong>AI Developer Platform</strong> del Grupo Falabella, con la que los equipos adoptan <strong>inteligencia artificial</strong> de forma autogestionada, segura y <strong>gobernada</strong>, automatizando procesos con IA generativa y agentes. Combino un Magíster en Inteligencia Artificial con una base sólida en DevOps y <strong>Platform Engineering</strong> para transformar necesidades de negocio en soluciones escalables y medibles.
-
-  Mi foco está en la <strong>captura de valor</strong>: eficiencia operacional, control de costos, modelos operativos claros y desarrollo de capacidades organizacionales. Fomento la colaboración entre áreas, la mejora continua y las decisiones basadas en datos.`,
+    text: `Lidero Kairos, la plataforma de IA del Grupo Falabella, junto a un equipo multidisciplinario. Tengo más de 15 años de experiencia en sistemas, DevOps y plataformas. Mi foco es que los equipos puedan desarrollar y operar aplicaciones y agentes de IA con autonomía, seguridad y control de costos.`,
   },
   education: [
     {

@@ -12,15 +12,17 @@ PDF_CONFIG = {
     'format': 'A4',
     'print_background': True,
     'margin': {
-        'top': '10mm',
-        'right': '12mm',
-        'bottom': '10mm',
-        'left': '12mm'
+        'top': '14mm',
+        'right': '16mm',
+        'bottom': '16mm',
+        'left': '16mm'
     },
-    'scale': 0.95,
+    'scale': 1,
     'prefer_css_page_size': True,
-    'display_header_footer': False,
-    'page_ranges': '1-2'
+    'display_header_footer': True,
+    'header_template': '<span></span>',
+    'footer_template': '<div style="font:8px system-ui,sans-serif;color:#535761;text-align:center;width:100%">Mario Faúndez · <span class="pageNumber"></span> / <span class="totalPages"></span></div>',
+    'tagged': True
 }
 
 # Configuración del navegador

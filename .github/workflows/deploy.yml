@@ -20,46 +20,46 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: pnpm
-
       - uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
-
       - name: Install dependencies
         run: |
           pnpm install --frozen-lockfile
-          uv sync
-
+          uv sync --frozen
       - name: Cache pre-commit hooks
         uses: actions/cache@v4
         with:
           path: ~/.cache/pre-commit
           key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
-
       - name: Lint (pre-commit)
         run: uv run pre-commit run --all-files
-
-      - name: Build site
+      - name: Build static bilingual site
         run: pnpm run build
-
       - name: Cache Playwright chromium
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ hashFiles('uv.lock') }}
-
-      - name: Generate PDF
+      - name: Generate complete PDFs
         run: |
           uv run playwright install chromium --with-deps
           uv run python scripts/generate_pdf.py
-
+      - name: Verify production build and PDF contents
+        run: |
+          pnpm run preview --host 127.0.0.1 --port 4173 --strictPort > "$RUNNER_TEMP/cv-preview.log" 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then break; fi
+            sleep 1
+          done
+          uv run python scripts/check_site.py --base-url http://127.0.0.1:4173
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -74,9 +74,22 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
-        # El backend de Pages falla esporádicamente con "try again later"
         continue-on-error: true
-
       - id: deployment-retry
         if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
+
+  verify-public:
+    if: github.ref == 'refs/heads/main'
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Verify published site and downloads
+        run: |
+          uv sync --frozen
+          uv run playwright install chromium --with-deps
+          uv run python scripts/check_site.py --base-url https://ordenador.cl

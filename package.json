@@ -7,11 +7,12 @@
   "main": "src/index.js",
   "scripts": {
     "start": "vite",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
-    "lint": "eslint src --ext .js,.jsx",
-    "lint:fix": "eslint src --ext .js,.jsx --fix",
-    "format": "prettier --write \"src/**/*.{js,jsx,json,md}\""
+    "lint": "eslint src entry-server.jsx site.config.mjs scripts/prerender.mjs vite.config.js",
+    "lint:fix": "eslint src entry-server.jsx site.config.mjs scripts/prerender.mjs vite.config.js --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx,json,md}\"",
+    "check:site": "uv run python scripts/check_site.py"
   },
   "dependencies": {
     "react": "^19.2.7",
@@ -19,9 +20,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@fontsource/inter": "^5.2.8",
-    "@fontsource/poppins": "^5.2.7",
-    "@fortawesome/fontawesome-free": "^7.3.0",
     "@tailwindcss/postcss": "^4.3.2",
     "@vitejs/plugin-react": "^6.0.3",
     "autoprefixer": "^10.5.2",

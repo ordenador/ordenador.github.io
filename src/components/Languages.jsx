@@ -1,18 +1,19 @@
 import { useLocale } from '../i18n/LocaleContext';
-
-const Languages = () => {
+export default function Languages() {
   const { data, labels } = useLocale();
-
   return (
-    <section className="mb-6 languages-section">
-      <h3 className="section-title">{labels.sections.languages}</h3>
-      {data.languages.map((language, index) => (
-        <p key={index} className="text-gray-600 text-xs mb-0.5">
-          <span className="font-semibold">{language.name}:</span> {language.level}
-        </p>
-      ))}
+    <section className="languages-section" aria-labelledby="languages-title">
+      <h2 id="languages-title" className="section-title">
+        {labels.sections.languages}
+      </h2>
+      <dl>
+        {data.languages.map((lang, idx) => (
+          <div key={idx}>
+            <dt>{lang.name}</dt>
+            <dd>{lang.level}</dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
-};
-
-export default Languages;
+}

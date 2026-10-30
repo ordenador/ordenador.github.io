@@ -14,10 +14,10 @@ repos:
         name: eslint
         entry: pnpm run lint
         language: system
-        files: \.(js|jsx)$
+        files: \.(js|jsx|mjs)$
         pass_filenames: false
       - id: prettier
         name: prettier
         entry: pnpm exec prettier --write --ignore-unknown
         language: system
-        files: \.(js|jsx|json|md|css)$
+        files: \.(js|jsx|mjs|json|md|css)$

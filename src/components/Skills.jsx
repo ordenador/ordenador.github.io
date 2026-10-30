@@ -1,23 +1,17 @@
 import { useLocale } from '../i18n/LocaleContext';
-
-const Skills = () => {
+export default function Skills() {
   const { data, labels } = useLocale();
-
   return (
-    <section className="mb-6 skills-section">
-      <h3 className="section-title">{labels.sections.skills}</h3>
-      {Object.entries(data.skills).map(([category, skillList]) => (
-        <div key={category} className={category === 'Change Maker' ? 'mb-3' : ''}>
-          <h4 className="font-semibold text-gray-700 text-sm mb-1">{category}</h4>
-          {skillList.map((skill, index) => (
-            <span key={index} className="skill-tag">
-              {skill}
-            </span>
-          ))}
+    <section className="skills-section" aria-labelledby="skills-title">
+      <h2 id="skills-title" className="section-title">
+        {labels.sections.skills}
+      </h2>
+      {Object.entries(data.skills).map(([category, skills]) => (
+        <div className="skill-group" key={category}>
+          <h3>{labels.skillCategories[category] ?? category}</h3>
+          <p>{skills.join(' · ')}</p>
         </div>
       ))}
     </section>
   );
-};
-
-export default Skills;
+}
