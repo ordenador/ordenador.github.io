@@ -6,6 +6,8 @@ import argparse
 import asyncio
 from io import BytesIO
 import json
+import hashlib
+import re
 from pathlib import Path
 from urllib.parse import urlsplit
 import xml.etree.ElementTree as ET
@@ -26,22 +28,92 @@ def check(condition, message):
         raise AssertionError(message)
 
 
-def pdf_checks(content, path):
+def pdf_checks(content, path, responsibilities=None, require_compact=True):
     reader = PdfReader(BytesIO(content))
     text = '\n'.join(page.extract_text() for page in reader.pages)
     check(len(reader.pages) >= 2, f'{path}: suspiciously short PDF')
+    if require_compact:
+        check(len(reader.pages) == 2, f'{path}: approved paper layout has two complete pages; review pagination')
     for value in ['Mario Faúndez', 'Adessa Falabella', 'LATAM Airlines', 'Finalis', 'DevOps Engineer', 'Kairos']:
         check(value in text, f'{path}: missing text {value}')
     check(text.count('Sysadmin Engineer') == 2, f'{path}: old roles omitted')
-    check(text.index('Kairos') < text.index('Adessa Falabella'), f'{path}: reading order')
+    normalized = re.sub(r'[^\w]', '', text).casefold()
+    periods = ['Mar2026', 'May2024Feb2026', '112023042025', '112020102023',
+               '072019102020', '102017062019', '062020072022', '062016102017', '062012122015']
+    positions = [normalized.find(period.casefold()) for period in periods]
+    check(all(position >= 0 for position in positions), f'{path}: missing career period')
+    check(positions == sorted(positions), f'{path}: career order across page/column continuation')
+    for responsibility in responsibilities or []:
+        expected_text = re.sub(r'[^\w]', '', responsibility).casefold()
+        check(expected_text in normalized, f'{path}: a source responsibility is missing from the PDF')
     check('/StructTreeRoot' in reader.trailer['/Root'], f'{path}: untagged PDF')
     links = [a.get_object().get('/A', {}).get('/URI', '') for page in reader.pages for a in page.get('/Annots', [])]
     check(any(link.startswith('mailto:') for link in links), f'{path}: no email link')
     check(any('linkedin.com' in link for link in links), f'{path}: no LinkedIn link')
     check(any('mfaundez.com' in link for link in links), f'{path}: no profile link')
     expected = 'Capacidades' if '.es.pdf' in path else 'Capabilities'
-    check(expected in text, f'{path}: wrong language')
+    check(expected.casefold() in text.casefold(), f'{path}: wrong language')
     print(f'PASS PDF {path}: {len(reader.pages)} pages, full career, reading order, links, tags')
+
+
+async def verify_screen_and_print(browser, base, args):
+    for locale, path in LOCALES.items():
+        for width in [320,390,768,1440]:
+            page = await browser.new_page(viewport={'width':width,'height':900})
+            errors = []
+            page.on('pageerror', lambda error: errors.append(str(error)))
+            await page.goto(base+path,wait_until='networkidle')
+            await page.evaluate('document.fonts.ready')
+            before = await page.screenshot(full_page=True)
+            if args.screen_baseline_dir:
+                approved = Path(args.screen_baseline_dir,f'{locale}-{width}.png').read_bytes()
+                check(before == approved, f'{locale}/{width}: approved frontend pixels changed')
+            fonts = await page.evaluate("performance.getEntriesByType('resource').filter(r=>r.name.includes('.woff')).map(r=>r.name)")
+            check(len(fonts) == 1 and 'schibsted' in fonts[0], 'No print font payload in screen mode')
+            for initially_open in [False,True]:
+                await page.locator('.career-history').evaluate('(element, value) => element.open = value', initially_open)
+                dom = await page.locator('#resumeContent').inner_html()
+                await page.emulate_media(media='print')
+                await page.wait_for_selector('.print-continuation')
+                await page.evaluate("window.dispatchEvent(new Event('beforeprint'))")
+                check(await page.locator('main > .print-columns').count() == 1, 'Repeated print preparation is idempotent')
+                check(await page.locator('.experience-item').count() == 9, 'All nine original entries present while printing')
+                check(await page.locator('.print-left-column .education-section').count() == 1, 'Education remains in classic left column')
+                check(await page.locator('.print-right-column .profile-section').count() == 1, 'Profile remains in classic right column')
+                await page.emulate_media(media='screen')
+                await page.wait_for_function("!document.querySelector('.print-continuation')")
+                check(await page.locator('#resumeContent').inner_html() == dom, 'Print/cancel restores exact original DOM and disclosure state')
+            await page.locator('.career-history').evaluate('(element) => element.open = false')
+            if width == 1440:
+                # A fresh context is intentional: explicit emulate_media('screen')
+                # can persist through CDP PDF capture even after clearing the
+                # override. Exercise real repeated native prints separately.
+                native = await browser.new_page(viewport={'width':1440,'height':900})
+                native_errors = []
+                native.on('pageerror', lambda error: native_errors.append(str(error)))
+                await native.goto(base+path,wait_until='networkidle')
+                await native.evaluate('document.fonts.ready')
+                dom = await native.locator('#resumeContent').inner_html()
+                pixels = await native.screenshot(full_page=True)
+                responsibilities = await native.locator('.experience-item .entry-summary, .experience-item .description-list li').all_text_contents()
+                for iteration in range(3):
+                    printed = await native.pdf(format='A4',print_background=True,tagged=True,prefer_css_page_size=True)
+                    await native.wait_for_function("!document.querySelector('.print-continuation')")
+                    check(await native.locator('#resumeContent').inner_html() == dom, 'Actual PDF export restores approved screen DOM')
+                    pdf_checks(printed,f'native-{iteration+1}.{locale}.pdf',responsibilities)
+                await native.evaluate("location.hash = 'experience'")
+                await native.wait_for_function("document.querySelector('.language-switcher a').getAttribute('href').endsWith('#experience')")
+                await native.evaluate("history.replaceState(null,'',location.pathname); scrollTo(0,0)")
+                check(await native.screenshot(full_page=True) == pixels, 'Repeated actual native PDFs preserve screen pixels')
+                check(not native_errors, f'Repeated native print caused React/browser errors: {native_errors}')
+                await native.close()
+            await page.evaluate('window.scrollTo(0,0)')
+            await page.evaluate('document.fonts.ready')
+            after = await page.screenshot(full_page=True)
+            check(before == after, f'{locale}/{width}: screen pixels changed after printing')
+            check(not errors, f'Print lifecycle caused browser errors: {errors}')
+            print(f'PASS {locale}/{width} screen unchanged before/after print: {hashlib.sha256(after).hexdigest()}')
+            await page.close()
 
 
 async def run(args):
@@ -147,8 +219,15 @@ async def run(args):
                 await page.set_viewport_size({'width':390,'height':844})
                 await page.screenshot(path=str(folder/f'{locale}-mobile.png'),full_page=True)
             await page.locator('.career-history').evaluate('(element) => element.open = false')
+            before_print = await page.locator('#resumeContent').inner_html()
             await page.emulate_media(media='print')
+            await page.wait_for_selector('.print-continuation')
             check(await page.locator('.experience-item').last.is_visible(), 'All history visible when printing')
+            check(await page.locator('.print-columns').count() == 2, 'Classic first page plus two-column continuation')
+            check(await page.locator('.print-continuation .experience-item').count() == 8, 'Eight older roles retained in continuation')
+            await page.emulate_media(media='screen')
+            await page.wait_for_function("!document.querySelector('.print-continuation')")
+            check(await page.locator('#resumeContent').inner_html() == before_print, 'Exact DOM restored after print')
             check(not errors, f'{locale}: console/hydration errors: {errors}')
             await page.close()
             print(f'PASS hydrated {locale}: URL/metadata/history/keyboard/print + 4 responsive widths')
@@ -164,6 +243,22 @@ async def run(args):
             check(await plain.locator('.experience-item').last.is_visible(), 'History usable without JS')
             await plain.locator(f'.language-switcher a[lang="{other}"]').click()
             check(await plain.locator('html').get_attribute('lang') == other, 'Language navigation without JS')
+            # Print-only CSS must retain all content even without the JS grouping
+            # hook, including if the stylesheet is loaded independently.
+            async def with_print_styles(route):
+                if route.request.is_navigation_request() and route.request.resource_type == 'document':
+                    response = await route.fetch()
+                    html = (await response.text()).replace('</head>', '<link rel="stylesheet" href="/print.css" media="print"></head>')
+                    await route.fulfill(response=response, body=html)
+                else:
+                    await route.continue_()
+            await nojs.route('**/*', with_print_styles)
+            await plain.reload(wait_until='networkidle')
+            await plain.emulate_media(media='print')
+            check(await plain.locator('.experience-item').last.is_visible(), 'No-JS print keeps old roles visible')
+            nojs_pdf = await plain.pdf(format='A4', print_background=True, tagged=True)
+            nojs_text = '\n'.join(sheet.extract_text() for sheet in PdfReader(BytesIO(nojs_pdf)).pages)
+            check('Adessa Falabella' in nojs_text and 'LATAM Airlines' in nojs_text, 'No-JS printed PDF retains older experience')
             await nojs.close()
             print(f'PASS no-JS {locale}: complete HTML + history + language link')
 
@@ -195,7 +290,10 @@ async def run(args):
             check(response.status == 200, f'PDF unavailable: {path}')
             check('application/pdf' in response.headers.get('content-type',''), f'PDF MIME: {path}')
             pdf_contents[path] = await response.body()
-            pdf_checks(pdf_contents[path],path)
+            source_path = '/?cv=ia-aplicada' if path.startswith('/cv/') else ('/' if '.es.pdf' in path else '/en/')
+            await page.goto(base+source_path,wait_until='networkidle')
+            source_responsibilities = await page.locator('.experience-item .entry-summary, .experience-item .description-list li').all_text_contents()
+            pdf_checks(pdf_contents[path],path,source_responsibilities)
         check(pdf_contents['/mario_faundez_cv.pdf'] == pdf_contents['/mario_faundez_cv.en.pdf'], 'Legacy alias equals English PDF')
         check(pdf_contents['/mario_faundez_cv.es.pdf'] != pdf_contents['/mario_faundez_cv.en.pdf'], 'Distinct language PDFs')
         for path in ['/missing-audit-route','/missing-audit-route.html','/missing-audit-asset.png']:
@@ -210,6 +308,7 @@ async def run(args):
         for path in ['/favicon.svg','/favicon.ico','/apple-touch-icon.png','/social-card.png','/fonts/schibsted-grotesk-latin.woff2']:
             check((await request.get(base+path)).status == 200, f'Asset unavailable: {path}')
         check(not analytics_requests, f'Automated browser sent analytics: {analytics_requests}')
+        await verify_screen_and_print(browser, base, args)
         await context.close()
         await browser.close()
         print('PASS discovery, identity assets, real 404, PDF aliases, analytics suppression')
@@ -220,4 +319,5 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base-url',default='http://127.0.0.1:4175')
     parser.add_argument('--screenshot-dir')
+    parser.add_argument('--screen-baseline-dir', help='Optional approved PNG baseline directory for exact screen pixel checks')
     asyncio.run(run(parser.parse_args()))

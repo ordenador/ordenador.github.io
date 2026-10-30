@@ -1,4 +1,8 @@
-# CV design and SEO — local validation
+# CV design and SEO — initial local validation
+
+The single-column four-page paper proposal below is historical and was rejected
+after user review. The screen frontend was approved. The revised paper contract
+and current validation are in [paper-correction.md](paper-correction.md).
 
 Date: 2026-10-30, America/Santiago. Baseline: `1e3c3687cd929eabe7e82b70c1575f05e9aa4686`.
 Worktree: `/Users/mfaundez/git/github/ordenador/ordenador-cv-preview`.

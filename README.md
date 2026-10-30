@@ -70,9 +70,11 @@ returns a real 404 for missing routes; a preview middleware enforces the same
 status for unknown pages and assets instead of Vite's default SPA fallback.
 
 Font Awesome and the old Inter/Poppins imports were replaced with a single
-licensed variable font and small inline SVGs. Web body copy is 16px; print uses
-9.5pt body text with a single reading column. Print style must be reviewed with
-the complete exports, not inferred from the responsive website alone.
+licensed variable font and small inline SVGs. Web body copy is 16px. Paper uses a separate compact two-column composition,
+9pt Arial-compatible Sans body text, navy headings and dark orange institutions,
+matching the actual older PDF. No additional print fonts are downloaded. The
+approved screen CSS, content and layout remain unchanged. Review every paper
+page separately; the responsive website does not represent the PDF composition.
 
 ## PDF exports
 
@@ -93,9 +95,21 @@ Public filenames are preserved:
 - `/mario_faundez_cv.pdf` — byte-for-byte alias of English
 - `/cv/ia-aplicada/mario_faundez_cv.es.pdf`
 
-A complete CV currently spans four A4 pages in each language. Do not force a fixed
-page count by truncating content. Tagged text, extraction order and links are
-checked; this is not a guarantee that every ATS handles a PDF identically.
+A complete CV currently spans **two A4 pages** in each language, with all nine
+roles. The first page retains the classic education/current-role left column and
+profile/capabilities right column. The second page continues the career across
+both columns, followed by certifications. Do not cap export pages or remove facts
+to meet a count: the two-page acceptance regression means a content/layout change
+needs review if pagination grows.
+
+`src/print-layout.js` reversibly groups the existing DOM nodes for printing;
+`public/print.css` is selected only for print media. Before/after-print and print
+media events preserve exact screen DOM and disclosure state, including cancellation.
+There is no duplicated CV data/template. Without JavaScript, browser printing uses
+the existing complete linear fallback; loading print CSS without grouping never
+hides the career. The download PDFs and normal browser print use the two-column
+layout. Tagged text, every source responsibility, within-career reading order and
+links are checked; this does not guarantee universal ATS compatibility.
 
 ## Validation
 
@@ -106,13 +120,19 @@ uv run pre-commit run --all-files
 uv run python scripts/check_site.py --base-url http://127.0.0.1:4175
 # Optional review screenshots:
 uv run python scripts/check_site.py --base-url http://127.0.0.1:4175 --screenshot-dir /tmp/cv-review
+# Optional exact comparison against previously approved screen PNGs:
+uv run python scripts/check_site.py --base-url http://127.0.0.1:4175 --screen-baseline-dir /tmp/cv-approved
 ```
 
 Acceptance checks cover full HTML with JS disabled, hydration warnings, URL-defined
 languages despite saved/browser preferences, legacy parameters, query/hash links,
 variant behavior, responsive layout at 320/390/768/1440px, keyboard navigation,
-printing closed history, metadata, schema, sitemap, genuine 404s, local identity
-assets, all four PDF paths, text/reading order/links/tags and analytics suppression.
+printing closed history, reversible DOM/disclosure restoration, exact screen pixels
+before/after printing at all four widths in both languages, three consecutive native
+PDF exports per locale, complete no-JS printing, metadata, schema, sitemap, genuine
+404s, local identity
+assets, all four PDF paths, all source summaries/responsibilities, career order across
+columns, links/tags and analytics suppression.
 `pypdf` is a development dependency for PDF checks; Playwright is already required
 for export. Review PNG renderings of every PDF page after layout changes.
 

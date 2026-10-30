@@ -43,8 +43,10 @@ class BrowserManager:
         try:
             await page.goto(f'{self.origin}/?{query}', wait_until='networkidle')
             await page.wait_for_selector('#resumeContent')
+            await page.wait_for_function("document.querySelector('link[href=\"/print.css\"]')?.sheet")
+            await page.emulate_media(media='print')
+            await page.wait_for_selector('.print-columns')
             await page.evaluate('document.fonts.ready')
-            await page.locator('.career-history').evaluate('(element) => element.open = true')
             await page.add_style_tag(content=get_pdf_styles())
             if errors:
                 raise RuntimeError(f'Browser errors during PDF generation: {errors}')

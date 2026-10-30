@@ -7,6 +7,7 @@ import { variants } from './data/variants';
 import { localeFromPath, localizedPages } from '../site.config.mjs';
 import { initializeAnalytics } from './analytics';
 import './styles/main.css';
+import { installPrintLayout } from './print-layout';
 
 const params = new URLSearchParams(location.search);
 const variantSlug = params.get('cv');
@@ -52,5 +53,6 @@ if (!isFile && !variant && (legacyLocale === 'en' || legacyLocale === 'es')) {
     robots.content = 'noindex';
     document.head.appendChild(robots);
   }
+  installPrintLayout();
   initializeAnalytics();
 }
